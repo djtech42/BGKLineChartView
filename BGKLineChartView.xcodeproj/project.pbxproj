@@ -8,12 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		26990CA31E1353D6004146D2 /* BGKLineChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26990CA11E1353D6004146D2 /* BGKLineChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26990CB11E1353F8004146D2 /* BGKLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAA1E1353F8004146D2 /* BGKLineChartView.swift */; };
+		26990CB21E1353F8004146D2 /* BGKLineChartViewCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAB1E1353F8004146D2 /* BGKLineChartViewCanvas.swift */; };
+		26990CB31E1353F8004146D2 /* BGKLineStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAC1E1353F8004146D2 /* BGKLineStyle.swift */; };
+		26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */; };
+		26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */; };
+		26990CB61E1353F8004146D2 /* BGKChartAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */; };
+		26990CB71E1353F8004146D2 /* BGKChartAxisExtents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		26990C9E1E1353D6004146D2 /* BGKLineChartView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BGKLineChartView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26990CA11E1353D6004146D2 /* BGKLineChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGKLineChartView.h; sourceTree = "<group>"; };
 		26990CA21E1353D6004146D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26990CAA1E1353F8004146D2 /* BGKLineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartView.swift; sourceTree = "<group>"; };
+		26990CAB1E1353F8004146D2 /* BGKLineChartViewCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartViewCanvas.swift; sourceTree = "<group>"; };
+		26990CAC1E1353F8004146D2 /* BGKLineStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineStyle.swift; sourceTree = "<group>"; };
+		26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartProtocols.swift; sourceTree = "<group>"; };
+		26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartViewLabel.swift; sourceTree = "<group>"; };
+		26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxis.swift; sourceTree = "<group>"; };
+		26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxisExtents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,10 +60,25 @@
 		26990CA01E1353D6004146D2 /* BGKLineChartView */ = {
 			isa = PBXGroup;
 			children = (
+				26990CA91E1353E3004146D2 /* Line Chart Files */,
 				26990CA11E1353D6004146D2 /* BGKLineChartView.h */,
 				26990CA21E1353D6004146D2 /* Info.plist */,
 			);
 			path = BGKLineChartView;
+			sourceTree = "<group>";
+		};
+		26990CA91E1353E3004146D2 /* Line Chart Files */ = {
+			isa = PBXGroup;
+			children = (
+				26990CAA1E1353F8004146D2 /* BGKLineChartView.swift */,
+				26990CAB1E1353F8004146D2 /* BGKLineChartViewCanvas.swift */,
+				26990CAC1E1353F8004146D2 /* BGKLineStyle.swift */,
+				26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */,
+				26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */,
+				26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */,
+				26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */,
+			);
+			name = "Line Chart Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +125,7 @@
 					26990C9D1E1353D6004146D2 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = JVV56LA836;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +162,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26990CB61E1353F8004146D2 /* BGKChartAxis.swift in Sources */,
+				26990CB21E1353F8004146D2 /* BGKLineChartViewCanvas.swift in Sources */,
+				26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */,
+				26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */,
+				26990CB71E1353F8004146D2 /* BGKChartAxisExtents.swift in Sources */,
+				26990CB31E1353F8004146D2 /* BGKLineStyle.swift in Sources */,
+				26990CB11E1353F8004146D2 /* BGKLineChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +277,7 @@
 		26990CA71E1353D6004146D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = JVV56LA836;
@@ -252,6 +290,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgk.BGKLineChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -259,6 +298,7 @@
 		26990CA81E1353D6004146D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = JVV56LA836;
