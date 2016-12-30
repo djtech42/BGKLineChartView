@@ -8,17 +8,18 @@
 
 import UIKit
 
+/// Class Responsible for the Drawing Plane of the Chart.
 class BGKLineChartViewCanvas: UIView {
     
-    public var dataSource: BGKLineChartDataSource?
+    var dataSource: BGKLineChartDataSource?
     
-    public var originLineWidth: CGFloat = 1.0 {
+    var originLineWidth: CGFloat = 1.0 {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    public var originLineColor: UIColor = UIColor.black {
+    var originLineColor: UIColor = UIColor.black {
         didSet {
             setNeedsDisplay()
         }
@@ -28,6 +29,8 @@ class BGKLineChartViewCanvas: UIView {
         drawOriginLines()
         drawChartLines()
     }
+    
+    // MARK: Drawing Helper Methods
     
     fileprivate func drawOriginLines() {
         let xOriginPath = UIBezierPath()
@@ -62,14 +65,14 @@ class BGKLineChartViewCanvas: UIView {
     fileprivate func convertToCanvasPoints(valuePoints: [BGKLinePoint]) -> [CGPoint] {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return [] }
-        let xAxisExtents = dataSource.valueExtents(lineView, forAxis: .xAxis)
-        let yAxisExtents = dataSource.valueExtents(lineView, forAxis: .yAxis)
-        let xAxisScale = bounds.width / CGFloat(xAxisExtents.length)
-        let yAxisScale = bounds.height / CGFloat(yAxisExtents.length)
+        let xAxisScale = bounds.width / CGFloat(dataSource.valueLength(lineView, forAxis: .xAxis))
+        let yAxisScale = bounds.height / CGFloat(dataSource.valueLength(lineView, forAxis: .yAxis))
+        let xMin = dataSource.valueMin(lineView, forAxis: .xAxis)
+        let yMin = dataSource.valueMin(lineView, forAxis: .yAxis)
         var points: [CGPoint] = []
         for value in valuePoints {
-            let xValue = (value.xValue - xAxisExtents.min) * Double(xAxisScale)
-            let yValue = (value.yValue - yAxisExtents.min) * Double(yAxisScale)
+            let xValue = (value.xValue - xMin) * Double(xAxisScale)
+            let yValue = (value.yValue - yMin) * Double(yAxisScale)
             let yValueForBottomOrigin = Double(bounds.height) - yValue
             let newPoint = CGPoint(x: xValue, y: yValueForBottomOrigin)
             points.append(newPoint)

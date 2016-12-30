@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Protocol used to provide basic styling to line chart objects.
 public protocol BGKLineStyle: class {
     var lineWidth: CGFloat { get }
     var lineColor: UIColor { get }

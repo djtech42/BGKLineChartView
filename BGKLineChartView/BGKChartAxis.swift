@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// Enum for axis type
+///
+/// - xAxis: represents x axis (horizontal)
+/// - yAxis: represents y axis (vertical)
 public enum BGKChartAxis {
     case xAxis
     case yAxis

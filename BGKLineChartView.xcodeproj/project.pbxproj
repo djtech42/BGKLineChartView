@@ -14,7 +14,7 @@
 		26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */; };
 		26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */; };
 		26990CB61E1353F8004146D2 /* BGKChartAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */; };
-		26990CB71E1353F8004146D2 /* BGKChartAxisExtents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */; };
+		26990CB71E1353F8004146D2 /* BGKChartExtents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CB01E1353F8004146D2 /* BGKChartExtents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartProtocols.swift; sourceTree = "<group>"; };
 		26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartViewLabel.swift; sourceTree = "<group>"; };
 		26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxis.swift; sourceTree = "<group>"; };
-		26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxisExtents.swift; sourceTree = "<group>"; };
+		26990CB01E1353F8004146D2 /* BGKChartExtents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartExtents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 				26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */,
 				26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */,
 				26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */,
-				26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */,
+				26990CB01E1353F8004146D2 /* BGKChartExtents.swift */,
 			);
 			name = "Line Chart Files";
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 				26990CB21E1353F8004146D2 /* BGKLineChartViewCanvas.swift in Sources */,
 				26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */,
 				26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */,
-				26990CB71E1353F8004146D2 /* BGKChartAxisExtents.swift in Sources */,
+				26990CB71E1353F8004146D2 /* BGKChartExtents.swift in Sources */,
 				26990CB31E1353F8004146D2 /* BGKLineStyle.swift in Sources */,
 				26990CB11E1353F8004146D2 /* BGKLineChartView.swift in Sources */,
 			);

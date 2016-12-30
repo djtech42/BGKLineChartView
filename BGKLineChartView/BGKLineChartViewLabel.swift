@@ -8,6 +8,12 @@
 
 import Foundation
 
+/// Enum of label types for chart view.
+///
+/// - yAxisMax: label for y Axis maximum
+/// - yAxisMin: label for y Axis minimum
+/// - xAxisMin: label for x Axis minimum
+/// - xAxisMax: label for x Axis maximum
 public enum BGKLineChartViewLabel {
     case yAxisMax
     case yAxisMin

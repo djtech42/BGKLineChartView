@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Class responsible for the Line Chart and basic labels. Must implement and set the dataSource property.
 public class BGKLineChartView: UIView {
     
     let standardSpacing: CGFloat = 8.0
@@ -17,6 +18,8 @@ public class BGKLineChartView: UIView {
     let xMaxLabel = UILabel(frame: CGRect.zero)
     let canvas = BGKLineChartViewCanvas(frame: CGRect.zero)
     
+    
+    /// Set to a class that conforms to BGKLineChartDataSource protocol.
     public var dataSource: BGKLineChartDataSource? {
         didSet {
             refreshView()
