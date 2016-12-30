@@ -38,7 +38,7 @@ public class BGKLineChartView: UIView {
     }
     
     fileprivate func refreshView() {
-        if subviews.count < 1 {
+        if subviews.isEmpty {
             setupLayoutNeeds()
         }
         canvas.dataSource = dataSource
@@ -109,13 +109,13 @@ public class BGKLineChartView: UIView {
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
         }
-        yMaxLabel.text = dataSource.lineChartView(self, stringForLabel: .yAxisMax)
+        yMaxLabel.text = dataSource.string(forLabel: .yAxisMax, in: self)
         yMaxLabel.textAlignment = .right
-        yMinLabel.text = dataSource.lineChartView(self, stringForLabel: .yAxisMin)
+        yMinLabel.text = dataSource.string(forLabel: .yAxisMin, in: self)
         yMinLabel.textAlignment = .right
-        xMinLabel.text = dataSource.lineChartView(self, stringForLabel: .xAxisMin)
+        xMinLabel.text = dataSource.string(forLabel: .xAxisMin, in: self)
         xMinLabel.textAlignment = .center
-        xMaxLabel.text = dataSource.lineChartView(self, stringForLabel: .xAxisMax)
+        xMaxLabel.text = dataSource.string(forLabel: .xAxisMax, in: self)
         xMaxLabel.textAlignment = .right
     }
 

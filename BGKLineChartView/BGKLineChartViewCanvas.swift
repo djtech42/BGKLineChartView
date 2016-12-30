@@ -50,8 +50,17 @@ class BGKLineChartViewCanvas: UIView {
     fileprivate func drawChartLines() {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return }
-        for lineNumber in 0..<dataSource.numberOfLinesToDraw(lineView) {
-            let valuePoints = dataSource.lineChartView(lineView, pointsForIndex: lineNumber)
+        
+        let numberOfLines = dataSource.numberOfLinesToDraw(in: lineView)
+        if numberOfLines == 0 {
+            print(BSGConsoleOutput.noLinesWarning)
+        }
+        for lineNumber in 0..<numberOfLines {
+            let valuePoints = dataSource.points(thatForm: lineNumber, in: lineView)
+            guard !valuePoints.isEmpty else {
+                print(BSGConsoleOutput.emptyLineWarning(for: lineNumber))
+                continue
+            }
             let canvasPoints = convertToCanvasPoints(valuePoints: valuePoints)
             drawLine(forPoints: canvasPoints, forLineNumber: lineNumber)
         }
@@ -59,11 +68,11 @@ class BGKLineChartViewCanvas: UIView {
     
     // MARK: - Helper Methods
     
-    fileprivate func convertToCanvasPoints(valuePoints: [BGKLinePoint]) -> [CGPoint] {
+    fileprivate func convertToCanvasPoints(valuePoints: BGKLine) -> [CGPoint] {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return [] }
-        let xAxisExtents = dataSource.valueExtents(lineView, forAxis: .xAxis)
-        let yAxisExtents = dataSource.valueExtents(lineView, forAxis: .yAxis)
+        let xAxisExtents = dataSource.valueExtents(for: .xAxis, in: lineView)
+        let yAxisExtents = dataSource.valueExtents(for: .yAxis, in: lineView)
         let xAxisScale = bounds.width / CGFloat(xAxisExtents.length)
         let yAxisScale = bounds.height / CGFloat(yAxisExtents.length)
         var points: [CGPoint] = []
@@ -77,16 +86,26 @@ class BGKLineChartViewCanvas: UIView {
         return points
     }
     
-    fileprivate func drawLine(forPoints points: [CGPoint], forLineNumber index: Int) {
+    fileprivate func drawLine(forPoints points: [CGPoint], forLineNumber lineNumber: Int) {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return }
-        let lineStyle = dataSource.lineChartView(lineView, styleForIndex: index)
+        let lineStyle = dataSource.style(for: lineNumber, in: lineView)
         let path = UIBezierPath()
         
-        path.lineWidth = lineStyle?.lineWidth ?? 1.0
-        (lineStyle != nil) ? lineStyle?.lineColor.setStroke() : UIColor.blue.setStroke()
-        
         var pointsToDraw = points
+        
+        if let existingLineStyle = lineStyle {
+            if existingLineStyle.thickness == 0 {
+                print(BSGConsoleOutput.noLineThicknessWarning(for: lineNumber))
+            }
+            path.lineWidth = existingLineStyle.thickness
+            existingLineStyle.color.setStroke()
+        }
+        else {
+            path.lineWidth = 1.0
+            UIColor.black.setStroke()
+        }
+        
         let lineOrigin = pointsToDraw.removeFirst()
         path.move(to: lineOrigin)
         
