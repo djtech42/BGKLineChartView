@@ -25,6 +25,7 @@ public protocol BGKLineChartDataSource: class {
     
     // MARK: - Methods with Default Implementations
     func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents
+    func valueMin(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> Double
     func valueLength(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> Double
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle?
     func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String?
@@ -34,6 +35,15 @@ public protocol BGKLineChartDataSource: class {
 extension BGKLineChartDataSource {
     func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents {
         return BGKChartExtents(withChartObjects: allValues(lineChartView))
+    }
+    func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
+        let extents = valueExtents(lineChartView)
+        switch axis {
+        case .xAxis:
+            return chartExtentsShouldBePadded(lineChartView) ? extents.paddedXMin : extents.xMin
+        case .yAxis:
+            return chartExtentsShouldBePadded(lineChartView) ? extents.paddedYMin : extents.yMin
+        }
     }
     func valueLength(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
         let extents = valueExtents(lineChartView)
