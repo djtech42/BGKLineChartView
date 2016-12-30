@@ -19,13 +19,17 @@ public protocol BGKLineChartDataSource: class {
     func lineChartView(_ lineChartView: BGKLineChartView, pointsForIndex: Int) -> [BGKLinePoint]
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle?
     func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String?
+    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }
 
 extension BGKLineChartDataSource {
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle? {
         return nil
-    }    
+    }
     func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String? {
         return nil
+    }
+    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool {
+        return true
     }
 }
