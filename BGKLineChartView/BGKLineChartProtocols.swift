@@ -22,6 +22,9 @@ public protocol BGKLineChartDataSource: class {
 }
 
 extension BGKLineChartDataSource {
+    func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle? {
+        return nil
+    }    
     func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String? {
         return nil
     }
