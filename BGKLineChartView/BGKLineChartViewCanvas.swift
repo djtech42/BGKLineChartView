@@ -8,17 +8,18 @@
 
 import UIKit
 
+/// Class Responsible for the Drawing Plane of the Chart.
 class BGKLineChartViewCanvas: UIView {
     
-    public var dataSource: BGKLineChartDataSource?
+    var dataSource: BGKLineChartDataSource?
     
-    public var originLineWidth: CGFloat = 1.0 {
+    var originLineWidth: CGFloat = 1.0 {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    public var originLineColor: UIColor = UIColor.black {
+    var originLineColor: UIColor = UIColor.black {
         didSet {
             setNeedsDisplay()
         }
@@ -28,6 +29,8 @@ class BGKLineChartViewCanvas: UIView {
         drawOriginLines()
         drawChartLines()
     }
+    
+    // MARK: Drawing Helper Methods
     
     fileprivate func drawOriginLines() {
         let xOriginPath = UIBezierPath()

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Responsible object for managing logic to determine the value extents needing to be charted.
 public struct BGKChartExtents {
     
     fileprivate let objects: [BGKChartable]
