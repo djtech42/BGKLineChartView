@@ -24,19 +24,20 @@ public protocol BGKLineChartDataSource: class {
     func lineChartView(_ lineChartView: BGKLineChartView, pointsForIndex: Int) -> [BGKLinePoint]
     
     // MARK: - Methods with Default Implementations
-    func valueExtents(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> BGKChartExtents
+    func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents
+    func valueLength(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> Double
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle?
     func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String?
     func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }
 
 extension BGKLineChartDataSource {
-    func valueExtents(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> BGKChartExtents {
-        switch axis {
-        case .xAxis:
-            
-        case .yAxis:
-        }
+    func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents {
+        return BGKChartExtents(withChartObjects: allValues(lineChartView))
+    }
+    func valueLength(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
+        let extents = valueExtents(lineChartView)
+        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedLength(forAxis: axis) : extents.length(forAxis: axis)
     }
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle? {
         return nil
