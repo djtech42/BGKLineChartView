@@ -32,7 +32,7 @@ public protocol BGKLineChartDataSource: class {
     func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }
 
-extension BGKLineChartDataSource {
+public extension BGKLineChartDataSource {
     func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents {
         return BGKChartExtents(withChartObjects: allValues(lineChartView))
     }
