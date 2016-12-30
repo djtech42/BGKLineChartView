@@ -13,16 +13,31 @@ public protocol BGKLinePoint {
     var yValue: Double { get }
 }
 
+public protocol BGKChartable {
+    var values: [BGKLinePoint] { get }
+}
+
 public protocol BGKLineChartDataSource: class {
+    // MARK: - Methods that Must be Implemented by User
     func numberOfLinesToDraw(_ lineChartView: BGKLineChartView) -> Int
-    func valueExtents(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> BGKChartAxisExtents
+    func allValues(_ lineChartView: BGKLineChartView) -> [BGKChartable]
     func lineChartView(_ lineChartView: BGKLineChartView, pointsForIndex: Int) -> [BGKLinePoint]
+    
+    // MARK: - Methods with Default Implementations
+    func valueExtents(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> BGKChartExtents
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle?
     func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String?
     func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }
 
 extension BGKLineChartDataSource {
+    func valueExtents(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> BGKChartExtents {
+        switch axis {
+        case .xAxis:
+            
+        case .yAxis:
+        }
+    }
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle? {
         return nil
     }
