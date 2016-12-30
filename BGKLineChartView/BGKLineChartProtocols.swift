@@ -18,5 +18,11 @@ public protocol BGKLineChartDataSource: class {
     func valueExtents(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> BGKChartAxisExtents
     func lineChartView(_ lineChartView: BGKLineChartView, pointsForIndex: Int) -> [BGKLinePoint]
     func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle?
-    func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String
+    func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String?
+}
+
+extension BGKLineChartDataSource {
+    func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String? {
+        return nil
+    }
 }
