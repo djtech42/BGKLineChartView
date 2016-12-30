@@ -20,6 +20,11 @@ Simply add `brendenk1/BGKLineChartView` to your Cartfile.
 
 [Carthage instructions if you have never used Carthage before.](https://github.com/Carthage/Carthage) 
 
+## How to Use
+1. Add `BGKLineChartView` as a subview to a view.
+2. Create a class that conforms to `BGKLineChartDataSource` protocol. 
+3. Set conforming `BGKLineChartDataSource` class to `BGKLineChartView.dataSource` property.
+
 ## License
     Copyright 2016 Brenden Konnagan
 
