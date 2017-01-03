@@ -84,10 +84,10 @@ public extension BGKLineChartDataSource {
             let value: Double
             
             switch label {
-            case .xAxisMax: value = maxValue(for: .xAxis, in: lineChartView)
-            case .xAxisMin: value = minValue(for: .xAxis, in: lineChartView)
-            case .yAxisMax: value = maxValue(for: .yAxis, in: lineChartView)
-            case .yAxisMin: value = minValue(for: .yAxis, in: lineChartView)
+            case .xAxisMax: value = valueMax(lineChartView, forAxis: .xAxis)
+            case .xAxisMin: value = valueMin(lineChartView, forAxis: .xAxis)
+            case .yAxisMax: value = valueMax(lineChartView, forAxis: .yAxis)
+            case .yAxisMin: value = valueMin(lineChartView, forAxis: .yAxis)
             }
             
             return String(format: "%.\(numberOfDecimals)f", value)
@@ -135,6 +135,10 @@ public extension BGKLineChartDataSource {
     func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
         let extents = valueExtents(for: axis, in: lineChartView)
         return chartExtentsShouldBePadded(lineChartView) ? extents.paddedMin : extents.min
+    }
+    func valueMax(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
+        let extents = valueExtents(for: axis, in: lineChartView)
+        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedMax : extents.max
     }
     func valueLength(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
         let extents = valueExtents(for: axis, in: lineChartView)
