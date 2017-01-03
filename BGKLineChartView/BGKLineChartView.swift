@@ -12,11 +12,11 @@ import UIKit
 public class BGKLineChartView: UIView {
     
     let standardSpacing: CGFloat = 8.0
-    let yMaxLabel = UILabel(frame: CGRect.zero)
-    let yMinLabel = UILabel(frame: CGRect.zero)
-    let xMinLabel = UILabel(frame: CGRect.zero)
-    let xMaxLabel = UILabel(frame: CGRect.zero)
-    let canvas = BGKLineChartViewCanvas(frame: CGRect.zero)
+    let yMaxLabel = UILabel(frame: .zero)
+    let yMinLabel = UILabel(frame: .zero)
+    let xMinLabel = UILabel(frame: .zero)
+    let xMaxLabel = UILabel(frame: .zero)
+    let canvas = BGKLineChartViewCanvas(frame: .zero)
     
     
     /// Set to a class that conforms to BGKLineChartDataSource protocol.
@@ -41,10 +41,12 @@ public class BGKLineChartView: UIView {
     }
     
     fileprivate func refreshView() {
-        if subviews.count < 1 {
+        if subviews.isEmpty {
             setupLayoutNeeds()
         }
         canvas.dataSource = dataSource
+        
+        setupCanvas()
         setupLabels()
     }
     
@@ -69,7 +71,8 @@ public class BGKLineChartView: UIView {
     }
     
     fileprivate func setupCanvas() {
-        canvas.backgroundColor = UIColor.white
+        guard let dataSource = dataSource else { return }
+        canvas.backgroundColor = dataSource.canvasBackgroundColor(for: self)
     }
     
     fileprivate func layoutCanvas() {
@@ -112,13 +115,13 @@ public class BGKLineChartView: UIView {
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
         }
-        yMaxLabel.text = dataSource.lineChartView(self, stringForLabel: .yAxisMax)
+        yMaxLabel.text = dataSource.string(forLabel: .yAxisMax, in: self)
         yMaxLabel.textAlignment = .right
-        yMinLabel.text = dataSource.lineChartView(self, stringForLabel: .yAxisMin)
+        yMinLabel.text = dataSource.string(forLabel: .yAxisMin, in: self)
         yMinLabel.textAlignment = .right
-        xMinLabel.text = dataSource.lineChartView(self, stringForLabel: .xAxisMin)
+        xMinLabel.text = dataSource.string(forLabel: .xAxisMin, in: self)
         xMinLabel.textAlignment = .center
-        xMaxLabel.text = dataSource.lineChartView(self, stringForLabel: .xAxisMax)
+        xMaxLabel.text = dataSource.string(forLabel: .xAxisMax, in: self)
         xMaxLabel.textAlignment = .right
     }
 
