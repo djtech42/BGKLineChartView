@@ -19,6 +19,7 @@
 		37468C8F1E15F371004DF4CB /* BGKConsoleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */; };
 		37468C931E15F9CB004DF4CB /* BGKLabelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */; };
 		AF6D879B1E1C491700D01992 /* BGKChartExtents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */; };
+		AF6D879D1E1C5DA600D01992 /* BGKChartStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D879C1E1C5DA600D01992 /* BGKChartStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKConsoleOutput.swift; sourceTree = "<group>"; };
 		37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLabelMode.swift; sourceTree = "<group>"; };
 		AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartExtents.swift; sourceTree = "<group>"; };
+		AF6D879C1E1C5DA600D01992 /* BGKChartStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				26990CAA1E1353F8004146D2 /* BGKLineChartView.swift */,
 				26990CAB1E1353F8004146D2 /* BGKLineChartViewCanvas.swift */,
 				26990CAC1E1353F8004146D2 /* BGKLineStyle.swift */,
+				AF6D879C1E1C5DA600D01992 /* BGKChartStyle.swift */,
 				26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */,
 				26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */,
 				26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */,
@@ -187,6 +190,7 @@
 				26990CB21E1353F8004146D2 /* BGKLineChartViewCanvas.swift in Sources */,
 				26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */,
 				26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */,
+				AF6D879D1E1C5DA600D01992 /* BGKChartStyle.swift in Sources */,
 				37468C8F1E15F371004DF4CB /* BGKConsoleOutput.swift in Sources */,
 				37468C931E15F9CB004DF4CB /* BGKLabelMode.swift in Sources */,
 				37468C751E15E49E004DF4CB /* BGKChartPadding.swift in Sources */,
