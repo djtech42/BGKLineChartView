@@ -11,15 +11,16 @@ import UIKit
 /// Class Responsible for the Drawing Plane of the Chart.
 class BGKLineChartViewCanvas: UIView {
     
-    public var dataSource: BGKLineChartDataSource?
+    var dataSource: BGKLineChartDataSource?
     
-    public var originLineWidth: CGFloat = 1.0 {
+    var originLineWidth: CGFloat = 1.0 {
         didSet {
             setNeedsDisplay()
         }
     }
     
     public var originLineColor: UIColor = .black {
+
         didSet {
             setNeedsDisplay()
         }
@@ -29,6 +30,8 @@ class BGKLineChartViewCanvas: UIView {
         drawOriginLines()
         drawChartLines()
     }
+    
+    // MARK: Drawing Helper Methods
     
     fileprivate func drawOriginLines() {
         let xOriginPath = UIBezierPath()
@@ -76,10 +79,11 @@ class BGKLineChartViewCanvas: UIView {
         let yAxisExtents = dataSource.valueExtents(for: .yAxis, in: lineView)
         let xAxisScale = bounds.width / CGFloat(xAxisExtents.length)
         let yAxisScale = bounds.height / CGFloat(yAxisExtents.length)
+
         var points: [CGPoint] = []
         for value in valuePoints {
-            let xValue = (value.xValue - xAxisExtents.min) * Double(xAxisScale)
-            let yValue = (value.yValue - yAxisExtents.min) * Double(yAxisScale)
+            let xValue = (value.xValue - xMin) * Double(xAxisScale)
+            let yValue = (value.yValue - yMin) * Double(yAxisScale)
             let yValueForBottomOrigin = Double(bounds.height) - yValue
             let newPoint = CGPoint(x: xValue, y: yValueForBottomOrigin)
             points.append(newPoint)

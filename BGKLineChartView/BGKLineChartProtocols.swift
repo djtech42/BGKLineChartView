@@ -21,6 +21,7 @@ public protocol BGKChartable {
     var values: [BGKLinePoint] { get }
 }
 
+
 /// Main protocol that defines the interface for a BGKLineChartDataSource. Two methods make up the required interface for this object: numberOfLinesToDraw(in: BGKLineChartView) and points(thatForm: Int, in: BGKLineChartView). Additional methods provide further cusomization for the data source.
 public protocol BGKLineChartDataSource: class {
     

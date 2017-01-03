@@ -36,6 +36,7 @@
 		37468C8A1E15F2B8004DF4CB /* Array+IndexAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+IndexAccess.swift"; sourceTree = "<group>"; };
 		37468C8E1E15F371004DF4CB /* BSGConsoleOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSGConsoleOutput.swift; sourceTree = "<group>"; };
 		37468C921E15F9CB004DF4CB /* BSGLabelMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSGLabelMode.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +90,7 @@
 				37468C8E1E15F371004DF4CB /* BSGConsoleOutput.swift */,
 				37468C921E15F9CB004DF4CB /* BSGLabelMode.swift */,
 				37468C9A1E1601B6004DF4CB /* Extensions */,
+
 			);
 			name = "Line Chart Files";
 			sourceTree = "<group>";

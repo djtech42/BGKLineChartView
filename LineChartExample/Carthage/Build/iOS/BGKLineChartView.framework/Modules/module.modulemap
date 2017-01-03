@@ -1,0 +1,10 @@
+framework module BGKLineChartView {
+  umbrella header "BGKLineChartView.h"
+
+  export *
+  module * { export * }
+}
+
+module BGKLineChartView.Swift {
+    header "BGKLineChartView-Swift.h"
+}
