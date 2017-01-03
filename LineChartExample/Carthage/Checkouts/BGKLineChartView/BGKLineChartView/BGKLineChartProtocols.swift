@@ -51,14 +51,14 @@ public protocol BGKLineChartDataSource: class {
     /// - Returns: style object for line
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle?
     func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor
-    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode
+    func labelMode(for lineChartView: BGKLineChartView) -> BSGLabelMode
     
     func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double
     /// Exposes to Data Source object an internal structure for value extents to be drawn.
     ///
     /// - Parameter lineChartView: line chart object
     /// - Returns: BGKChartExtents object
-    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
+    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartAxisExtents
 }
 
 public extension BGKLineChartDataSource {
@@ -114,13 +114,13 @@ public extension BGKLineChartDataSource {
     }
     
     func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor { return .white }
-    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode { return .hidden }
+    func labelMode(for lineChartView: BGKLineChartView) -> BSGLabelMode { return .hidden }
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? { return nil }
     
     func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
         return 0
     }
-    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
-        return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
+    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartAxisExtents {
+        return BGKChartAxisExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
     }
 }

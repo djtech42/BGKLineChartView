@@ -14,11 +14,11 @@
 		26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */; };
 		26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */; };
 		26990CB61E1353F8004146D2 /* BGKChartAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */; };
+		26990CB71E1353F8004146D2 /* BGKChartAxisExtents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */; };
 		37468C751E15E49E004DF4CB /* BGKChartPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C741E15E49E004DF4CB /* BGKChartPadding.swift */; };
 		37468C8B1E15F2B8004DF4CB /* Array+IndexAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C8A1E15F2B8004DF4CB /* Array+IndexAccess.swift */; };
-		37468C8F1E15F371004DF4CB /* BGKConsoleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */; };
-		37468C931E15F9CB004DF4CB /* BGKLabelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */; };
-		AF6D879B1E1C491700D01992 /* BGKChartExtents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */; };
+		37468C8F1E15F371004DF4CB /* BSGConsoleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C8E1E15F371004DF4CB /* BSGConsoleOutput.swift */; };
+		37468C931E15F9CB004DF4CB /* BSGLabelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C921E15F9CB004DF4CB /* BSGLabelMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,11 +31,12 @@
 		26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartProtocols.swift; sourceTree = "<group>"; };
 		26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartViewLabel.swift; sourceTree = "<group>"; };
 		26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxis.swift; sourceTree = "<group>"; };
+		26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxisExtents.swift; sourceTree = "<group>"; };
 		37468C741E15E49E004DF4CB /* BGKChartPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartPadding.swift; sourceTree = "<group>"; };
 		37468C8A1E15F2B8004DF4CB /* Array+IndexAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+IndexAccess.swift"; sourceTree = "<group>"; };
-		37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKConsoleOutput.swift; sourceTree = "<group>"; };
-		37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLabelMode.swift; sourceTree = "<group>"; };
-		AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartExtents.swift; sourceTree = "<group>"; };
+		37468C8E1E15F371004DF4CB /* BSGConsoleOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSGConsoleOutput.swift; sourceTree = "<group>"; };
+		37468C921E15F9CB004DF4CB /* BSGLabelMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSGLabelMode.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,11 +85,12 @@
 				26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */,
 				26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */,
 				26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */,
-				AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */,
+				26990CB01E1353F8004146D2 /* BGKChartAxisExtents.swift */,
 				37468C741E15E49E004DF4CB /* BGKChartPadding.swift */,
-				37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */,
-				37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */,
+				37468C8E1E15F371004DF4CB /* BSGConsoleOutput.swift */,
+				37468C921E15F9CB004DF4CB /* BSGLabelMode.swift */,
 				37468C9A1E1601B6004DF4CB /* Extensions */,
+
 			);
 			name = "Line Chart Files";
 			sourceTree = "<group>";
@@ -182,13 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6D879B1E1C491700D01992 /* BGKChartExtents.swift in Sources */,
 				26990CB61E1353F8004146D2 /* BGKChartAxis.swift in Sources */,
 				26990CB21E1353F8004146D2 /* BGKLineChartViewCanvas.swift in Sources */,
 				26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */,
 				26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */,
-				37468C8F1E15F371004DF4CB /* BGKConsoleOutput.swift in Sources */,
-				37468C931E15F9CB004DF4CB /* BGKLabelMode.swift in Sources */,
+				37468C8F1E15F371004DF4CB /* BSGConsoleOutput.swift in Sources */,
+				26990CB71E1353F8004146D2 /* BGKChartAxisExtents.swift in Sources */,
+				37468C931E15F9CB004DF4CB /* BSGLabelMode.swift in Sources */,
 				37468C751E15E49E004DF4CB /* BGKChartPadding.swift in Sources */,
 				26990CB31E1353F8004146D2 /* BGKLineStyle.swift in Sources */,
 				26990CB11E1353F8004146D2 /* BGKLineChartView.swift in Sources */,

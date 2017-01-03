@@ -57,12 +57,12 @@ class BGKLineChartViewCanvas: UIView {
         
         let numberOfLines = dataSource.numberOfLinesToDraw(in: lineView)
         if numberOfLines == 0 {
-            print(BGKConsoleOutput.noLinesWarning)
+            print(BSGConsoleOutput.noLinesWarning)
         }
         for lineNumber in 0..<numberOfLines {
             let valuePoints = dataSource.points(thatForm: lineNumber, in: lineView)
             guard !valuePoints.isEmpty else {
-                print(BGKConsoleOutput.emptyLineWarning(for: lineNumber))
+                print(BSGConsoleOutput.emptyLineWarning(for: lineNumber))
                 continue
             }
             let canvasPoints = convertToCanvasPoints(valuePoints: valuePoints)
@@ -82,8 +82,8 @@ class BGKLineChartViewCanvas: UIView {
 
         var points: [CGPoint] = []
         for value in valuePoints {
-            let xValue = (value.xValue - xAxisExtents.min) * Double(xAxisScale)
-            let yValue = (value.yValue - yAxisExtents.min) * Double(yAxisScale)
+            let xValue = (value.xValue - xMin) * Double(xAxisScale)
+            let yValue = (value.yValue - yMin) * Double(yAxisScale)
             let yValueForBottomOrigin = Double(bounds.height) - yValue
             let newPoint = CGPoint(x: xValue, y: yValueForBottomOrigin)
             points.append(newPoint)
@@ -101,7 +101,7 @@ class BGKLineChartViewCanvas: UIView {
         
         if let existingLineStyle = lineStyle {
             if existingLineStyle.thickness == 0 {
-                print(BGKConsoleOutput.noLineThicknessWarning(for: lineNumber))
+                print(BSGConsoleOutput.noLineThicknessWarning(for: lineNumber))
             }
             path.lineWidth = existingLineStyle.thickness
             existingLineStyle.color.setStroke()
