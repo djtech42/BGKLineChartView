@@ -75,15 +75,14 @@ class BGKLineChartViewCanvas: UIView {
     fileprivate func convertToCanvasPoints(valuePoints: [BGKLinePoint]) -> [CGPoint] {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return [] }
-        let xAxisExtents = dataSource.valueExtents(for: .xAxis, in: lineView)
-        let yAxisExtents = dataSource.valueExtents(for: .yAxis, in: lineView)
-        let xAxisScale = bounds.width / CGFloat(xAxisExtents.length)
-        let yAxisScale = bounds.height / CGFloat(yAxisExtents.length)
+        
+        let xAxisScale = bounds.width / CGFloat(dataSource.valueLength(lineView, forAxis: .xAxis))
+        let yAxisScale = bounds.height / CGFloat(dataSource.valueLength(lineView, forAxis: .yAxis))
 
         var points: [CGPoint] = []
         for value in valuePoints {
-            let xValue = (value.xValue - xAxisExtents.min) * Double(xAxisScale)
-            let yValue = (value.yValue - yAxisExtents.min) * Double(yAxisScale)
+            let xValue = (value.xValue - dataSource.valueMin(lineView, forAxis: .xAxis)) * Double(xAxisScale)
+            let yValue = (value.yValue - dataSource.valueMin(lineView, forAxis: .yAxis)) * Double(yAxisScale)
             let yValueForBottomOrigin = Double(bounds.height) - yValue
             let newPoint = CGPoint(x: xValue, y: yValueForBottomOrigin)
             points.append(newPoint)

@@ -59,6 +59,12 @@ public protocol BGKLineChartDataSource: class {
     /// - Parameter lineChartView: line chart object
     /// - Returns: BGKChartExtents object
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
+    
+    /// Method responsible for setting a "padding" around the values visible on the chart. Returns true by default. Returning false puts the max and min extent values as the chart's extent.
+    ///
+    /// - Parameter lineChartView: line chart object
+    /// - Returns: Bool for padding
+    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }
 
 public extension BGKLineChartDataSource {
@@ -123,4 +129,16 @@ public extension BGKLineChartDataSource {
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
         return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
     }
+    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool {
+        return true
+    }
+    func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
+        let extents = valueExtents(for: axis, in: lineChartView)
+        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedMin : extents.min
+    }
+    func valueLength(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
+        let extents = valueExtents(for: axis, in: lineChartView)
+        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedLength : extents.length
+    }
+
 }
