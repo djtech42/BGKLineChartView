@@ -64,5 +64,11 @@ extension ViewController: BGKLineChartDataSource {
     
     func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint] {
         return values[lineNumber].values
+<<<<<<< HEAD
+=======
+    }
+    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode {
+        return .range(numberOfDecimals: 1)
+>>>>>>> dev
     }
 }

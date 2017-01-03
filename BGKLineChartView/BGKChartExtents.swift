@@ -22,7 +22,7 @@ public struct BGKChartExtents {
     }
     
     public var paddedMin: Double {
-        return min * 0.9
+        return min
     }
     
     public var paddedMax: Double {
