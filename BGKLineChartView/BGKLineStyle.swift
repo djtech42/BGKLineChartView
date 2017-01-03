@@ -8,7 +8,13 @@
 
 import UIKit
 
-public struct BGKLineStyle {
+/// Class used to provide basic styling to line chart objects.
+public class BGKLineStyle {
     var thickness: CGFloat
     var color: UIColor
+    
+    init(withThickness thickness: CGFloat, andColor color: UIColor) {
+        self.thickness = thickness
+        self.color = color
+    }
 }

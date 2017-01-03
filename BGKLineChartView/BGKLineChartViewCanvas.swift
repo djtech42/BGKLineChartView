@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Class Responsible for the Drawing Plane of the Chart.
 class BGKLineChartViewCanvas: UIView {
     
     public var dataSource: BGKLineChartDataSource?
@@ -18,7 +19,7 @@ class BGKLineChartViewCanvas: UIView {
         }
     }
     
-    public var originLineColor: UIColor = UIColor.black {
+    public var originLineColor: UIColor = .black {
         didSet {
             setNeedsDisplay()
         }
@@ -38,7 +39,7 @@ class BGKLineChartViewCanvas: UIView {
         
         originLineColor.setStroke()
         
-        xOriginPath.move(to: CGPoint.zero)
+        xOriginPath.move(to: .zero)
         xOriginPath.addLine(to: CGPoint(x: 0.0, y: bounds.height))
         yOriginPath.move(to: CGPoint(x: 0.0, y: bounds.height))
         yOriginPath.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
@@ -68,7 +69,7 @@ class BGKLineChartViewCanvas: UIView {
     
     // MARK: - Helper Methods
     
-    fileprivate func convertToCanvasPoints(valuePoints: BGKLine) -> [CGPoint] {
+    fileprivate func convertToCanvasPoints(valuePoints: [BGKLinePoint]) -> [CGPoint] {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return [] }
         let xAxisExtents = dataSource.valueExtents(for: .xAxis, in: lineView)

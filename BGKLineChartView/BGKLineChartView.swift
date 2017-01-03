@@ -8,15 +8,18 @@
 
 import UIKit
 
+/// Class responsible for the Line Chart and basic labels. Must implement and set the dataSource property.
 public class BGKLineChartView: UIView {
     
     let standardSpacing: CGFloat = 8.0
-    let yMaxLabel = UILabel(frame: CGRect.zero)
-    let yMinLabel = UILabel(frame: CGRect.zero)
-    let xMinLabel = UILabel(frame: CGRect.zero)
-    let xMaxLabel = UILabel(frame: CGRect.zero)
-    let canvas = BGKLineChartViewCanvas(frame: CGRect.zero)
+    let yMaxLabel = UILabel(frame: .zero)
+    let yMinLabel = UILabel(frame: .zero)
+    let xMinLabel = UILabel(frame: .zero)
+    let xMaxLabel = UILabel(frame: .zero)
+    let canvas = BGKLineChartViewCanvas(frame: .zero)
     
+    
+    /// Set to a class that conforms to BGKLineChartDataSource protocol.
     public var dataSource: BGKLineChartDataSource? {
         didSet {
             refreshView()
@@ -42,6 +45,8 @@ public class BGKLineChartView: UIView {
             setupLayoutNeeds()
         }
         canvas.dataSource = dataSource
+        
+        setupCanvas()
         setupLabels()
     }
     
@@ -66,7 +71,8 @@ public class BGKLineChartView: UIView {
     }
     
     fileprivate func setupCanvas() {
-        canvas.backgroundColor = UIColor.white
+        guard let dataSource = dataSource else { return }
+        canvas.backgroundColor = dataSource.canvasBackgroundColor(for: self)
     }
     
     fileprivate func layoutCanvas() {
