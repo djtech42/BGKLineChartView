@@ -8,17 +8,13 @@
 
 import UIKit
 
-/// Protocol used to provide basic styling to line chart objects.
-public protocol BGKLineStyle: class {
-    var lineWidth: CGFloat { get }
-    var lineColor: UIColor { get }
-}
-
-extension BGKLineStyle {
-    var lineWidth: CGFloat {
-        return 1.0
-    }
-    var lineColor: UIColor {
-        return UIColor.blue
+/// Class used to provide basic styling to line chart objects.
+public class BGKLineStyle {
+    var thickness: CGFloat
+    var color: UIColor
+    
+    init(withThickness thickness: CGFloat, andColor color: UIColor) {
+        self.thickness = thickness
+        self.color = color
     }
 }

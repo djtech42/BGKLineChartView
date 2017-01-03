@@ -9,7 +9,7 @@
 import UIKit
 import BGKLineChartView
 
-class ViewController: UIViewController, BGKLineChartDataSource {
+class ViewController: UIViewController {
 
     @IBOutlet weak var lineChart: BGKLineChartView!
     
@@ -54,18 +54,15 @@ class ViewController: UIViewController, BGKLineChartDataSource {
     }
     
     var values: [BGKChartable] = []
-    
+}
+
+extension ViewController: BGKLineChartDataSource {
     // DataSource Conformance
-    func numberOfLinesToDraw(_ lineChartView: BGKLineChartView) -> Int {
+    func numberOfLinesToDraw(in lineChartView: BGKLineChartView) -> Int {
         return values.count
     }
     
-    func allValues(_ lineChartView: BGKLineChartView) -> [BGKChartable] {
-        return values
-    }
-    
-    func lineChartView(_ lineChartView: BGKLineChartView, pointsForIndex index: Int) -> [BGKLinePoint] {
-        return values[index].values
+    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint] {
+        return values[lineNumber].values
     }
 }
-
