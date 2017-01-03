@@ -66,6 +66,6 @@ extension ViewController: BGKLineChartDataSource {
         return values[lineNumber].values
     }
     func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode {
-        return .range(numberOfDecimals: 0)
+        return .range(numberOfDecimals: 1)
     }
 }
