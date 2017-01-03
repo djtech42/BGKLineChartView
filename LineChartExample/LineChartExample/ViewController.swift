@@ -72,3 +72,13 @@ extension ViewController: BGKLineChartDataSource {
 >>>>>>> dev
     }
 }
+
+extension ViewController {
+    func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? {
+        return BGKLineStyle(withThickness: 2.0, andColor: .black)
+    }
+    
+    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode {
+        return .range(numberOfDecimalDigits: 0)
+    }
+}

@@ -41,6 +41,7 @@ public protocol BGKLineChartDataSource: class {
     /// - Returns: Array of line point objects
     func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint]
     
+    
     // MARK: - Methods with Default Implementations
     
     /// Method responsible for providing styling for line chart object.
@@ -50,7 +51,17 @@ public protocol BGKLineChartDataSource: class {
     ///   - styleForIndex: index of line object
     /// - Returns: style object for line
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle?
-    func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor
+    
+    /// Method responsible for providing styling for the entire chart.
+    ///
+    /// - Parameter lineChartView: line chart object
+    /// - Returns: style object for chart
+    func style(for lineChartView: BGKLineChartView) -> BGKChartStyle?
+    
+    /// Method responsible for providing label configuration for line chart object.
+    ///
+    /// - Parameter lineChartView: line chart object
+    /// - Returns: label mode object
     func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode
 <<<<<<< HEAD
 =======
@@ -63,7 +74,6 @@ public protocol BGKLineChartDataSource: class {
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
 >>>>>>> dev
     
-    func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double
     /// Exposes to Data Source object an internal structure for value extents to be drawn.
     ///
     /// - Parameter lineChartView: line chart object
@@ -140,13 +150,10 @@ public extension BGKLineChartDataSource {
 =======
     }
     
-    func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor { return .white }
+    func style(for lineChartView: BGKLineChartView) -> BGKChartStyle? { return nil }
     func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode { return .hidden }
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? { return nil }
     
-    func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
-        return 0
-    }
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
         return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
 >>>>>>> dev
