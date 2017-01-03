@@ -1,5 +1,5 @@
 //
-//  BGKChartExtents.swift
+//  BGKChartAxisExtents.swift
 //  Line Chart
 //
 //  Created by Brenden Konnagan on 12/27/16.
@@ -8,72 +8,28 @@
 
 import Foundation
 
-/// Responsible object for managing logic to determine the value extents needing to be charted.
 public struct BGKChartExtents {
+    public let min: Double
+    public let max: Double
     
-    fileprivate let objects: [BGKChartable]
-    
-    fileprivate var xValues: [Double] {
-        return objects.flatMap({ $0.values }).map({ $0.xValue })
+    public init(min: Double, max: Double) {
+        self.min = min
+        self.max = max
     }
     
-    fileprivate var yValues: [Double] {
-        return objects.flatMap({ $0.values }).map({ $0.yValue })
+    public var length: Double {
+        return max - min
     }
     
-    // MARK: - Public API
-    
-    public var xMin: Double {
-        return xValues.min() ?? 0.0
+    public var paddedMin: Double {
+        return min * 0.9
     }
     
-    public var paddedXMin: Double {
-        return xMin * 0.9
+    public var paddedMax: Double {
+        return max * 1.1
     }
     
-    public var xMax: Double {
-        return xValues.max() ?? 0.0
-    }
-    
-    public var paddedXMax: Double {
-        return xMax * 1.1
-    }
-    
-    public var yMin: Double {
-        return yValues.min() ?? 0.0
-    }
-    
-    public var paddedYMin: Double {
-        return yMin * 0.9
-    }
-    
-    public var paddedYMax: Double {
-        return yMax * 1.1
-    }
-    
-    public var yMax: Double {
-         return yValues.max() ?? 0.0
-    }
-    
-    public init(withChartObjects objects: [BGKChartable]) {
-        self.objects = objects
-    }
-    
-    public func length(forAxis axis: BGKChartAxis) -> Double {
-        switch axis {
-        case .xAxis:
-            return xMax - xMin
-        case .yAxis:
-            return yMax - yMin
-        }
-    }
-    
-    public func paddedLength(forAxis axis: BGKChartAxis) -> Double {
-        switch axis {
-        case .xAxis:
-            return paddedXMax - paddedXMin
-        case .yAxis:
-            return paddedYMax - paddedYMin
-        }
+    public var paddedLength: Double {
+        return paddedMax - paddedMin
     }
 }

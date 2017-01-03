@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias BGKLine = [BGKLinePoint]
+
 /// Protocol that defines the interface for an object that can provide points for BGKLineChart.
 public protocol BGKLinePoint {
     var xValue: Double { get }
@@ -19,7 +21,8 @@ public protocol BGKChartable {
     var values: [BGKLinePoint] { get }
 }
 
-/// Main protocol that defines the interface for a BGKLineChartDataSource. Three methods make up the required interface for this object: numberOfLinesToDraw( : BGKLineChartView); allValues( : BGKLineChartView); and linechartView( : BGKLineChartView, pointsForIndex: Int). Additional methods provide further cusomization for the data source.
+
+/// Main protocol that defines the interface for a BGKLineChartDataSource. Two methods make up the required interface for this object: numberOfLinesToDraw(in: BGKLineChartView) and points(thatForm: Int, in: BGKLineChartView). Additional methods provide further cusomization for the data source.
 public protocol BGKLineChartDataSource: class {
     
     // MARK: - Methods that Must be Implemented by User
@@ -29,51 +32,16 @@ public protocol BGKLineChartDataSource: class {
     ///
     /// - Parameter lineChartView: line chart object
     /// - Returns: Integer value of number of chart objects.
-    func numberOfLinesToDraw(_ lineChartView: BGKLineChartView) -> Int
-    
-    
-    /// Exposes the data source object to custom data structure.
-    ///
-    /// - Parameter lineChartView: line chart object
-    /// - Returns: Array of chartable objects to be drawn.
-    func allValues(_ lineChartView: BGKLineChartView) -> [BGKChartable]
-    
-    
+    func numberOfLinesToDraw(in lineChartView: BGKLineChartView) -> Int
     /// Provides line points for the chart at an index.
     ///
     /// - Parameters:
+    ///   - lineNumber: index of chart object
     ///   - lineChartView: line chart object
-    ///   - pointsForIndex: index of chart object
     /// - Returns: Array of line point objects
-    func lineChartView(_ lineChartView: BGKLineChartView, pointsForIndex: Int) -> [BGKLinePoint]
+    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint]
     
     // MARK: - Methods with Default Implementations
-    
-    
-    /// Exposes to Data Source object an internal structure for value extents to be drawn.
-    ///
-    /// - Parameter lineChartView: line chart object
-    /// - Returns: BGKChartExtents object
-    func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents
-    
-    
-    /// Responsible for providing the chart object with min values for a particular axis.
-    ///
-    /// - Parameters:
-    ///   - lineChartView: line chart object
-    ///   - forAxis: desired axis
-    /// - Returns: minimum value as Double
-    func valueMin(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> Double
-    
-    
-    /// Repsonsible for providing the chart object with the length each axis needs to chart.
-    ///
-    /// - Parameters:
-    ///   - lineChartView: line chart object
-    ///   - forAxis: desired axis
-    /// - Returns: length value as Double
-    func valueLength(_ lineChartView: BGKLineChartView, forAxis: BGKChartAxis) -> Double
-    
     
     /// Method responsible for providing styling for line chart object.
     ///
@@ -81,49 +49,78 @@ public protocol BGKLineChartDataSource: class {
     ///   - lineChartView: line chart object
     ///   - styleForIndex: index of line object
     /// - Returns: style object for line
-    func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle?
+    func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle?
+    func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor
+    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode
     
-    
-    /// Method responsible for providing strings for chart extents. This is used to provide values for min max on both x and y axis.
-    ///
-    /// - Parameters:
-    ///   - lineChartView: line chart object
-    ///   - stringForLabel: label looking for string
-    /// - Returns: string value for label
-    func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String?
-    
-    
-    /// Method responsible for setting a "padding" around the values visible on the chart. Returns true by default. Returning false puts the max and min extent values as the chart's extent.
+    func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double
+    /// Exposes to Data Source object an internal structure for value extents to be drawn.
     ///
     /// - Parameter lineChartView: line chart object
-    /// - Returns: Bool for padding
-    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
+    /// - Returns: BGKChartExtents object
+    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
 }
 
 public extension BGKLineChartDataSource {
-    func valueExtents(_ lineChartView: BGKLineChartView) -> BGKChartExtents {
-        return BGKChartExtents(withChartObjects: allValues(lineChartView))
+    private func lines(in lineChartView: BGKLineChartView) -> [BGKLine] {
+        var allLines: [BGKLine] = []
+        for lineNumber in 0..<numberOfLinesToDraw(in: lineChartView) {
+            allLines.append(points(thatForm: lineNumber, in: lineChartView))
+        }
+        
+        return allLines
     }
-    func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
-        let extents = valueExtents(lineChartView)
-        switch axis {
-        case .xAxis:
-            return chartExtentsShouldBePadded(lineChartView) ? extents.paddedXMin : extents.xMin
-        case .yAxis:
-            return chartExtentsShouldBePadded(lineChartView) ? extents.paddedYMin : extents.yMin
+    
+    func string(forLabel label: BGKLineChartViewLabel, in lineChartView: BGKLineChartView) -> String? {
+        switch labelMode(for: lineChartView) {
+        case .hidden: return nil
+        case let .range(numberOfDecimals):
+            let value: Double
+            
+            switch label {
+            case .xAxisMax: value = maxValue(for: .xAxis, in: lineChartView)
+            case .xAxisMin: value = minValue(for: .xAxis, in: lineChartView)
+            case .yAxisMax: value = maxValue(for: .yAxis, in: lineChartView)
+            case .yAxisMin: value = minValue(for: .yAxis, in: lineChartView)
+            }
+            
+            return String(format: "%.\(numberOfDecimals)f", value)
+        case let .custom(xAxisLeft, xAxisRight, yAxisBottom, yAxisTop):
+            switch label {
+            case .xAxisMin: return xAxisLeft
+            case .xAxisMax: return xAxisRight
+            case .yAxisMin: return yAxisBottom
+            case .yAxisMax: return yAxisTop
+            }
         }
     }
-    func valueLength(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
-        let extents = valueExtents(lineChartView)
-        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedLength(forAxis: axis) : extents.length(forAxis: axis)
+    
+    func minValue(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
+        switch axis {
+        case .xAxis:
+            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.xValue }).min() ?? 0.0
+        case .yAxis:
+            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.yValue }).min() ?? 0.0
+        }
     }
-    func lineChartView(_ lineChartView: BGKLineChartView, styleForIndex: Int) -> BGKLineStyle? {
-        return nil
+    
+    func maxValue(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
+        switch axis {
+        case .xAxis:
+            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.xValue }).max() ?? 0.0
+        case .yAxis:
+            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.yValue }).max() ?? 0.0
+        }
     }
-    func lineChartView(_ lineChartView: BGKLineChartView, stringForLabel: BGKLineChartViewLabel) -> String? {
-        return nil
+    
+    func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor { return .white }
+    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode { return .hidden }
+    func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? { return nil }
+    
+    func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
+        return 0
     }
-    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool {
-        return true
+    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
+        return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
     }
 }

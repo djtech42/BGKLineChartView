@@ -19,7 +19,8 @@ class BGKLineChartViewCanvas: UIView {
         }
     }
     
-    var originLineColor: UIColor = UIColor.black {
+    public var originLineColor: UIColor = .black {
+
         didSet {
             setNeedsDisplay()
         }
@@ -41,7 +42,7 @@ class BGKLineChartViewCanvas: UIView {
         
         originLineColor.setStroke()
         
-        xOriginPath.move(to: CGPoint.zero)
+        xOriginPath.move(to: .zero)
         xOriginPath.addLine(to: CGPoint(x: 0.0, y: bounds.height))
         yOriginPath.move(to: CGPoint(x: 0.0, y: bounds.height))
         yOriginPath.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
@@ -53,8 +54,17 @@ class BGKLineChartViewCanvas: UIView {
     fileprivate func drawChartLines() {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return }
-        for lineNumber in 0..<dataSource.numberOfLinesToDraw(lineView) {
-            let valuePoints = dataSource.lineChartView(lineView, pointsForIndex: lineNumber)
+        
+        let numberOfLines = dataSource.numberOfLinesToDraw(in: lineView)
+        if numberOfLines == 0 {
+            print(BGKConsoleOutput.noLinesWarning)
+        }
+        for lineNumber in 0..<numberOfLines {
+            let valuePoints = dataSource.points(thatForm: lineNumber, in: lineView)
+            guard !valuePoints.isEmpty else {
+                print(BGKConsoleOutput.emptyLineWarning(for: lineNumber))
+                continue
+            }
             let canvasPoints = convertToCanvasPoints(valuePoints: valuePoints)
             drawLine(forPoints: canvasPoints, forLineNumber: lineNumber)
         }
@@ -65,14 +75,15 @@ class BGKLineChartViewCanvas: UIView {
     fileprivate func convertToCanvasPoints(valuePoints: [BGKLinePoint]) -> [CGPoint] {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return [] }
-        let xAxisScale = bounds.width / CGFloat(dataSource.valueLength(lineView, forAxis: .xAxis))
-        let yAxisScale = bounds.height / CGFloat(dataSource.valueLength(lineView, forAxis: .yAxis))
-        let xMin = dataSource.valueMin(lineView, forAxis: .xAxis)
-        let yMin = dataSource.valueMin(lineView, forAxis: .yAxis)
+        let xAxisExtents = dataSource.valueExtents(for: .xAxis, in: lineView)
+        let yAxisExtents = dataSource.valueExtents(for: .yAxis, in: lineView)
+        let xAxisScale = bounds.width / CGFloat(xAxisExtents.length)
+        let yAxisScale = bounds.height / CGFloat(yAxisExtents.length)
+
         var points: [CGPoint] = []
         for value in valuePoints {
-            let xValue = (value.xValue - xMin) * Double(xAxisScale)
-            let yValue = (value.yValue - yMin) * Double(yAxisScale)
+            let xValue = (value.xValue - xAxisExtents.min) * Double(xAxisScale)
+            let yValue = (value.yValue - yAxisExtents.min) * Double(yAxisScale)
             let yValueForBottomOrigin = Double(bounds.height) - yValue
             let newPoint = CGPoint(x: xValue, y: yValueForBottomOrigin)
             points.append(newPoint)
@@ -80,16 +91,26 @@ class BGKLineChartViewCanvas: UIView {
         return points
     }
     
-    fileprivate func drawLine(forPoints points: [CGPoint], forLineNumber index: Int) {
+    fileprivate func drawLine(forPoints points: [CGPoint], forLineNumber lineNumber: Int) {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView else { return }
-        let lineStyle = dataSource.lineChartView(lineView, styleForIndex: index)
+        let lineStyle = dataSource.style(for: lineNumber, in: lineView)
         let path = UIBezierPath()
         
-        path.lineWidth = lineStyle?.lineWidth ?? 1.0
-        (lineStyle != nil) ? lineStyle?.lineColor.setStroke() : UIColor.blue.setStroke()
-        
         var pointsToDraw = points
+        
+        if let existingLineStyle = lineStyle {
+            if existingLineStyle.thickness == 0 {
+                print(BGKConsoleOutput.noLineThicknessWarning(for: lineNumber))
+            }
+            path.lineWidth = existingLineStyle.thickness
+            existingLineStyle.color.setStroke()
+        }
+        else {
+            path.lineWidth = 1.0
+            UIColor.black.setStroke()
+        }
+        
         let lineOrigin = pointsToDraw.removeFirst()
         path.move(to: lineOrigin)
         
