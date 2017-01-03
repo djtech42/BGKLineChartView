@@ -13,7 +13,7 @@ public class BGKLineStyle {
     var thickness: CGFloat
     var color: UIColor
     
-    init(withThickness thickness: CGFloat, andColor color: UIColor) {
+    public init(withThickness thickness: CGFloat, andColor color: UIColor) {
         self.thickness = thickness
         self.color = color
     }
