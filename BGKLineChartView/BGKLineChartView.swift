@@ -71,7 +71,7 @@ public class BGKLineChartView: UIView {
     }
     
     fileprivate func setupCanvas() {
-        canvas.backgroundColor = dataSource?.style(for: self)?.backgroundColor
+        canvas.backgroundColor = dataSource?.style(for: self)?.backgroundColor ?? .white
     }
     
     fileprivate func layoutCanvas() {
