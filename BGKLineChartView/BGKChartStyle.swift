@@ -12,9 +12,11 @@ import UIKit
 public struct BGKChartStyle {
     let backgroundColor: UIColor
     let shouldShowAxes: Bool
+    let labelMode: BGKLabelMode
     
-    public init(withBackgroundColor backgroundColor: UIColor?, andShowingAxes shouldShowAxes: Bool?) {
+    public init(withBackgroundColor backgroundColor: UIColor?, andShowingAxes shouldShowAxes: Bool?, withLabelMode labelMode: BGKLabelMode?) {
         self.backgroundColor = backgroundColor ?? .white
         self.shouldShowAxes = shouldShowAxes ?? true
+        self.labelMode = labelMode ?? .hidden
     }
 }

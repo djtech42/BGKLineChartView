@@ -58,12 +58,6 @@ public protocol BGKLineChartDataSource: class {
     /// - Returns: style object for chart
     func style(for lineChartView: BGKLineChartView) -> BGKChartStyle?
     
-    /// Method responsible for providing label configuration for line chart object.
-    ///
-    /// - Parameter lineChartView: line chart object
-    /// - Returns: label mode object
-    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode
-    
     /// Exposes to Data Source object an internal structure for value extents to be drawn.
     ///
     /// - Parameter lineChartView: line chart object
@@ -84,7 +78,9 @@ public extension BGKLineChartDataSource {
     }
     
     func string(forLabel label: BGKLineChartViewLabel, in lineChartView: BGKLineChartView) -> String? {
-        switch labelMode(for: lineChartView) {
+        guard let labelMode = style(for: lineChartView)?.labelMode else { return nil }
+        
+        switch labelMode {
         case .hidden: return nil
         case let .range(numberOfDecimals):
             let value: Double
@@ -126,7 +122,6 @@ public extension BGKLineChartDataSource {
     }
     
     func style(for lineChartView: BGKLineChartView) -> BGKChartStyle? { return nil }
-    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode { return .hidden }
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? { return nil }
     
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
