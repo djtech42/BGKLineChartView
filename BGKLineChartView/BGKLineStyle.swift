@@ -14,18 +14,7 @@ public struct BGKLineStyle {
     let color: UIColor
     
     public init(withThickness thickness: CGFloat?, andColor color: UIColor?) {
-        if let changedThickness = thickness {
-            self.thickness = changedThickness
-        }
-        else {
-            self.thickness = 1.0
-        }
-        
-        if let changedColor = color {
-            self.color = changedColor
-        }
-        else {
-            self.color = .black
-        }
+        self.thickness = thickness ?? 1.0
+        self.color = color ?? .black
     }
 }

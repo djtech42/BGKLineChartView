@@ -10,9 +10,11 @@ import UIKit
 
 /// Struct used to provide basic styling to a line chart.
 public struct BGKChartStyle {
-    let canvasBackgroundColor: UIColor
+    let backgroundColor: UIColor
+    let shouldShowAxes: Bool
     
-    public init(withCanvasBackgroundColor canvasBackgroundColor: UIColor) {
-        self.canvasBackgroundColor = canvasBackgroundColor
+    public init(withBackgroundColor backgroundColor: UIColor?, andShowingAxes shouldShowAxes: Bool?) {
+        self.backgroundColor = backgroundColor ?? .white
+        self.shouldShowAxes = shouldShowAxes ?? true
     }
 }
