@@ -82,7 +82,7 @@ public extension BGKLineChartDataSource {
         
         switch labelMode {
         case .hidden: return nil
-        case let .range(numberOfDecimals):
+        case let .minMax(numberOfDecimals):
             let value: Double
             
             switch label {
