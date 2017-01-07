@@ -49,5 +49,9 @@ public protocol BGKLineChartDataSource: class {
     /// - Returns: BGKChartExtents object
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
     
+    /// Tells the chart that the values drawn in the canvas will have a padding on the extents. This ensures that the values are drawn inside the edge of the canvas. This returns true by default.
+    ///
+    /// - Parameter lineChartView: line chart object
+    /// - Returns: True for padded, false for no padding.
     func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }

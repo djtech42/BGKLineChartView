@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// Below are private protocol default implementations.
+
+
+// MARK: - <#Description#>
 public extension BGKLineChartDataSource {
     private func lines(in lineChartView: BGKLineChartView) -> [BGKChartObject] {
         var allLines: [BGKChartObject] = []
@@ -63,8 +67,8 @@ public extension BGKLineChartDataSource {
         }
     }
     
-    func style(for lineChartView: BGKLineChartView) -> BGKChartStyle? { return nil }
-    func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? { return nil }
+    
+    
     
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
         return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
@@ -82,6 +86,6 @@ public extension BGKLineChartDataSource {
         return chartExtentsShouldBePadded(lineChartView) ? extents.paddedLength : extents.length
     }
     
-    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool { return true }
+    
     
 }
