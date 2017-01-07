@@ -73,6 +73,6 @@ extension ViewController {
     }
     
     func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode {
-        return .range(numberOfDecimalDigits: 1)
+        return .minMax(withLimitedNumberOfDecimalDigits: 2)
     }
 }

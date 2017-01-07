@@ -12,10 +12,18 @@
 		2656F8881E170EB700F6CD95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2656F8861E170EB700F6CD95 /* Main.storyboard */; };
 		2656F88A1E170EB700F6CD95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2656F8891E170EB700F6CD95 /* Assets.xcassets */; };
 		2656F88D1E170EB700F6CD95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2656F88B1E170EB700F6CD95 /* LaunchScreen.storyboard */; };
-		2656F8951E170F5600F6CD95 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 2656F8941E170F5600F6CD95 /* Cartfile */; };
-		2656F8971E170FDA00F6CD95 /* BGKLineChartView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2656F8961E170FDA00F6CD95 /* BGKLineChartView.framework */; };
-		2656F8981E170FDA00F6CD95 /* BGKLineChartView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2656F8961E170FDA00F6CD95 /* BGKLineChartView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26AA62381E2168EC00C9D942 /* BGKLineChartView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26AA62371E2168D900C9D942 /* BGKLineChartView.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		26AA62361E2168D900C9D942 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26AA62321E2168D900C9D942 /* BGKLineChartView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 26990C9E1E1353D6004146D2;
+			remoteInfo = BGKLineChartView;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2656F8991E170FDA00F6CD95 /* Embed Frameworks */ = {
@@ -24,7 +32,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2656F8981E170FDA00F6CD95 /* BGKLineChartView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -39,8 +46,7 @@
 		2656F8891E170EB700F6CD95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2656F88C1E170EB700F6CD95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2656F88E1E170EB700F6CD95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2656F8941E170F5600F6CD95 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		2656F8961E170FDA00F6CD95 /* BGKLineChartView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BGKLineChartView.framework; path = Carthage/Build/iOS/BGKLineChartView.framework; sourceTree = "<group>"; };
+		26AA62321E2168D900C9D942 /* BGKLineChartView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BGKLineChartView.xcodeproj; path = ../BGKLineChartView.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2656F8971E170FDA00F6CD95 /* BGKLineChartView.framework in Frameworks */,
+				26AA62381E2168EC00C9D942 /* BGKLineChartView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,8 +64,7 @@
 		2656F8761E170EB600F6CD95 = {
 			isa = PBXGroup;
 			children = (
-				2656F8961E170FDA00F6CD95 /* BGKLineChartView.framework */,
-				2656F8941E170F5600F6CD95 /* Cartfile */,
+				26AA62321E2168D900C9D942 /* BGKLineChartView.xcodeproj */,
 				2656F8811E170EB700F6CD95 /* LineChartExample */,
 				2656F8801E170EB700F6CD95 /* Products */,
 			);
@@ -84,6 +89,14 @@
 				2656F88E1E170EB700F6CD95 /* Info.plist */,
 			);
 			path = LineChartExample;
+			sourceTree = "<group>";
+		};
+		26AA62331E2168D900C9D942 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				26AA62371E2168D900C9D942 /* BGKLineChartView.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,12 +148,28 @@
 			mainGroup = 2656F8761E170EB600F6CD95;
 			productRefGroup = 2656F8801E170EB700F6CD95 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 26AA62331E2168D900C9D942 /* Products */;
+					ProjectRef = 26AA62321E2168D900C9D942 /* BGKLineChartView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2656F87E1E170EB600F6CD95 /* LineChartExample */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		26AA62371E2168D900C9D942 /* BGKLineChartView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BGKLineChartView.framework;
+			remoteRef = 26AA62361E2168D900C9D942 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2656F87D1E170EB600F6CD95 /* Resources */ = {
@@ -149,7 +178,6 @@
 			files = (
 				2656F88D1E170EB700F6CD95 /* LaunchScreen.storyboard in Resources */,
 				2656F88A1E170EB700F6CD95 /* Assets.xcassets in Resources */,
-				2656F8951E170F5600F6CD95 /* Cartfile in Resources */,
 				2656F8881E170EB700F6CD95 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +362,7 @@
 				2656F8931E170EB700F6CD95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
