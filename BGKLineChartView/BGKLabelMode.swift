@@ -16,6 +16,6 @@ import Foundation
 /// - custom: specify custom text for each label
 public enum BGKLabelMode {
     case hidden
-    case range(numberOfDecimalDigits: Int)
+    case minMax(withLimitedNumberOfDecimalDigits: Int)
     case custom(xAxisLeft: String, xAxisRight: String, yAxisBottom: String, yAxisTop: String)
 }
