@@ -17,7 +17,8 @@ public class BGKLineChartView: UIView {
     let xMinLabel = UILabel(frame: .zero)
     let xMaxLabel = UILabel(frame: .zero)
     let canvas = BGKLineChartViewCanvas(frame: .zero)
-    
+    var xValueExtents: BGKChartExtents?
+    var yValueExtents: BGKChartExtents?
     
     /// Set to a class that conforms to BGKLineChartDataSource protocol.
     public var dataSource: BGKLineChartDataSource? {
@@ -41,11 +42,13 @@ public class BGKLineChartView: UIView {
     }
     
     fileprivate func refreshView() {
-        if subviews.isEmpty {
-            setupLayoutNeeds()
-        }
+        guard let dataSource = dataSource else { return }
+        if subviews.isEmpty { setupLayoutNeeds() }
         canvas.dataSource = dataSource
-        
+        xValueExtents = dataSource.valueExtents(for: .xAxis, in: self)
+        yValueExtents = dataSource.valueExtents(for: .yAxis, in: self)
+        canvas.xValueExtents = xValueExtents
+        canvas.yValueExtents = yValueExtents
         setupCanvas()
         setupLabels()
     }
@@ -109,18 +112,20 @@ public class BGKLineChartView: UIView {
     // MARK: - Configure Views
     
     fileprivate func setupLabels() {
-        guard let dataSource = dataSource else { return }
+        guard let dataSource = dataSource, let xValueExtents = xValueExtents, let yValueExtents = yValueExtents else { return }
         for label in labels {
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
         }
-        yMaxLabel.text = dataSource.string(forLabel: .yAxisMax, in: self)
+        /// Set text for labels
+        yMaxLabel.text = dataSource.string(forLabel: .yAxisMax, with: (xValueExtents, yValueExtents), in: self)
+        yMinLabel.text = dataSource.string(forLabel: .yAxisMin, with: (xValueExtents, yValueExtents), in: self)
+        xMinLabel.text = dataSource.string(forLabel: .xAxisMin, with: (xValueExtents, yValueExtents), in: self)
+        xMaxLabel.text = dataSource.string(forLabel: .xAxisMax, with: (xValueExtents, yValueExtents), in: self)
+        /// Set Label Alignment
         yMaxLabel.textAlignment = .right
-        yMinLabel.text = dataSource.string(forLabel: .yAxisMin, in: self)
         yMinLabel.textAlignment = .right
-        xMinLabel.text = dataSource.string(forLabel: .xAxisMin, in: self)
         xMinLabel.textAlignment = .center
-        xMaxLabel.text = dataSource.string(forLabel: .xAxisMax, in: self)
         xMaxLabel.textAlignment = .right
     }
 

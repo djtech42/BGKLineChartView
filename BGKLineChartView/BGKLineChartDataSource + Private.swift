@@ -14,65 +14,30 @@ import Foundation
 // MARK: - Responsible for Determining Value Extents for the Canvas
 extension BGKLineChartDataSource {
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
+        let values = chartItems(in: lineChartView)
         switch axis {
         case .xAxis:
-            return BGKChartExtents(withAllAxisValues: chartItems.flatMap({ $0 }).map({ $0.xValue }))
+            return BGKChartExtents(withAllAxisValues: values.flatMap({ $0 }).map({ $0.xValue }))
         case .yAxis:
-            return BGKChartExtents(withAllAxisValues: chartItems.flatMap({ $0 }).map({ $0.yValue }))
+            return BGKChartExtents(withAllAxisValues: values.flatMap({ $0 }).map({ $0.yValue }))
         }
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// MARK: - Responsible for Providing String Values for Labels Based on Label Mode
 extension BGKLineChartDataSource {
-    private func lines(in lineChartView: BGKLineChartView) -> [BGKChartObject] {
-        var allLines: [BGKChartObject] = []
-        for lineNumber in 0..<numberOfLinesToDraw(in: lineChartView) {
-            allLines.append(points(thatForm: lineNumber, in: lineChartView))
-        }
-        
-        return allLines
-    }
-    
-    func string(forLabel label: BGKLineChartViewLabel, in lineChartView: BGKLineChartView) -> String? {
-        
+    func string(forLabel label: BGKLineChartViewLabel, with extents: (xExtents: BGKChartExtents, yExtents: BGKChartExtents), in lineChartView: BGKLineChartView) -> String? {
         guard let labelMode = style(for: lineChartView)?.labelMode else { return nil }
         switch labelMode {
         case .hidden: return nil
         case let .minMax(numberOfDecimals):
-            
             let value: Double
-            
             switch label {
-            case .xAxisMax: value = valueMax(lineChartView, forAxis: .xAxis)
-            case .xAxisMin: value = valueMin(lineChartView, forAxis: .xAxis)
-            case .yAxisMax: value = valueMax(lineChartView, forAxis: .yAxis)
-            case .yAxisMin: value = valueMin(lineChartView, forAxis: .yAxis)
+            case .xAxisMax: value = chartExtentsShouldBePadded(lineChartView) ? extents.xExtents.paddedMax : extents.xExtents.max
+            case .xAxisMin: value = chartExtentsShouldBePadded(lineChartView) ? extents.xExtents.paddedMin : extents.xExtents.min
+            case .yAxisMax: value = chartExtentsShouldBePadded(lineChartView) ? extents.yExtents.paddedMax : extents.yExtents.max
+            case .yAxisMin: value = chartExtentsShouldBePadded(lineChartView) ? extents.yExtents.paddedMin : extents.yExtents.min
             }
-            
             return String(format: "%.\(numberOfDecimals)f", value)
         case let .custom(xAxisLeft, xAxisRight, yAxisBottom, yAxisTop):
             switch label {
@@ -83,42 +48,25 @@ extension BGKLineChartDataSource {
             }
         }
     }
-    
-    func minValue(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
-        switch axis {
-        case .xAxis:
-            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.xValue }).min() ?? 0.0
-        case .yAxis:
-            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.yValue }).min() ?? 0.0
-        }
-    }
-    
-    func maxValue(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
-        switch axis {
-        case .xAxis:
-            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.xValue }).max() ?? 0.0
-        case .yAxis:
-            return lines(in: lineChartView).flatMap({ $0 }).map({ $0.yValue }).max() ?? 0.0
-        }
-    }
-    
-    
-    
-    
-    
-    func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
-        let extents = valueExtents(for: axis, in: lineChartView)
+}
+
+// MARK: - Responsible for Providing Min Values for Chart Axis
+extension BGKLineChartDataSource {
+    func minValue(in lineChartView: BGKLineChartView, with extents: BGKChartExtents) -> Double {
         return chartExtentsShouldBePadded(lineChartView) ? extents.paddedMin : extents.min
     }
-    func valueMax(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
-        let extents = valueExtents(for: axis, in: lineChartView)
-        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedMax : extents.max
+}
+
+// MARK: - Responsible for Calculating Scale for Canvas View
+extension BGKLineChartDataSource {
+    func scaleValue(in lineChartView: BGKLineChartView, for axis: BGKChartAxis, with extents: BGKChartExtents) -> Double {
+        var bounds: CGFloat = 0.0
+        switch axis {
+        case .xAxis:
+            bounds = lineChartView.canvas.bounds.width
+        case .yAxis:
+            bounds = lineChartView.canvas.bounds.height
+        }
+        return chartExtentsShouldBePadded(lineChartView) ? Double(bounds) / extents.paddedLength : Double(bounds) / extents.length
     }
-    func valueLength(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
-        let extents = valueExtents(for: axis, in: lineChartView)
-        return chartExtentsShouldBePadded(lineChartView) ? extents.paddedLength : extents.length
-    }
-    
-    
-    
 }
