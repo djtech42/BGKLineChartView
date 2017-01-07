@@ -65,7 +65,14 @@ extension ViewController: BGKLineChartDataSource {
     func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint] {
         return values[lineNumber].values
     }
+}
+
+extension ViewController {
+    func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? {
+        return BGKLineStyle(withThickness: 2.0, andColor: .black)
+    }
+    
     func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode {
-        return .range(numberOfDecimals: 1)
+        return .range(numberOfDecimalDigits: 1)
     }
 }

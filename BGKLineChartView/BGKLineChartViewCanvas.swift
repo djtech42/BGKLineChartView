@@ -27,7 +27,12 @@ class BGKLineChartViewCanvas: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        drawOriginLines()
+        guard let lineView = self.superview as? BGKLineChartView else { return }
+        let shouldShowAxes = dataSource?.style(for: lineView)?.shouldShowAxes ?? true
+        
+        if shouldShowAxes {
+            drawOriginLines()
+        }
         drawChartLines()
     }
     

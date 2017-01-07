@@ -40,7 +40,7 @@ public protocol BGKLineChartDataSource: class {
     ///   - lineChartView: line chart object
     /// - Returns: Array of line point objects
     func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint]
-    
+
     // MARK: - Methods with Default Implementations
     
     /// Method responsible for providing styling for line chart object.
@@ -50,20 +50,19 @@ public protocol BGKLineChartDataSource: class {
     ///   - styleForIndex: index of line object
     /// - Returns: style object for line
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle?
-    func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor
-    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode
     
-    func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double
+    /// Method responsible for providing styling for the entire chart.
+    ///
+    /// - Parameter lineChartView: line chart object
+    /// - Returns: style object for chart
+    func style(for lineChartView: BGKLineChartView) -> BGKChartStyle?
+    
     /// Exposes to Data Source object an internal structure for value extents to be drawn.
     ///
     /// - Parameter lineChartView: line chart object
     /// - Returns: BGKChartExtents object
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
     
-    /// Method responsible for setting a "padding" around the values visible on the chart. Returns true by default. Returning false puts the max and min extent values as the chart's extent.
-    ///
-    /// - Parameter lineChartView: line chart object
-    /// - Returns: Bool for padding
     func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool
 }
 
@@ -78,9 +77,12 @@ public extension BGKLineChartDataSource {
     }
     
     func string(forLabel label: BGKLineChartViewLabel, in lineChartView: BGKLineChartView) -> String? {
-        switch labelMode(for: lineChartView) {
+
+        guard let labelMode = style(for: lineChartView)?.labelMode else { return nil }
+        switch labelMode {
         case .hidden: return nil
-        case let .range(numberOfDecimals):
+        case let .minMax(numberOfDecimals):
+
             let value: Double
             
             switch label {
@@ -119,18 +121,11 @@ public extension BGKLineChartDataSource {
         }
     }
     
-    func canvasBackgroundColor(for lineChartView: BGKLineChartView) -> UIColor { return .white }
-    func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode { return .hidden }
+    func style(for lineChartView: BGKLineChartView) -> BGKChartStyle? { return nil }
     func style(for lineNumber: Int, in lineChartView: BGKLineChartView) -> BGKLineStyle? { return nil }
     
-    func padding(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> Double {
-        return 0
-    }
     func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
         return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
-    }
-    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool {
-        return true
     }
     func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
         let extents = valueExtents(for: axis, in: lineChartView)
@@ -144,5 +139,7 @@ public extension BGKLineChartDataSource {
         let extents = valueExtents(for: axis, in: lineChartView)
         return chartExtentsShouldBePadded(lineChartView) ? extents.paddedLength : extents.length
     }
+    
+    func chartExtentsShouldBePadded(_ lineChartView: BGKLineChartView) -> Bool { return true }
 
 }
