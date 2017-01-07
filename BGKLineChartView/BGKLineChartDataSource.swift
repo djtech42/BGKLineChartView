@@ -13,12 +13,14 @@ public protocol BGKLineChartDataSource: class {
     
     // MARK: - Methods that Must be Implemented by User
     
+    var chartItems: [BGKChartObject] { get }
     
     /// Tells the line chart how many line objects are to be drawn.
     ///
     /// - Parameter lineChartView: line chart object
     /// - Returns: Integer value of number of chart objects.
     func numberOfLinesToDraw(in lineChartView: BGKLineChartView) -> Int
+    
     /// Provides line points for the chart at an index.
     ///
     /// - Parameters:

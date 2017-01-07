@@ -17,6 +17,11 @@ public struct BGKChartExtents {
         self.max = max
     }
     
+    init(withAllAxisValues values: [Double]) {
+        self.min = values.min() ?? 0.0
+        self.max = values.max() ?? 0.0
+    }
+    
     public var length: Double {
         return max - min
     }

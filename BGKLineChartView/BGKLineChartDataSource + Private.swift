@@ -11,8 +11,43 @@ import Foundation
 /// Below are private protocol default implementations.
 
 
-// MARK: - <#Description#>
-public extension BGKLineChartDataSource {
+// MARK: - Responsible for Determining Value Extents for the Canvas
+extension BGKLineChartDataSource {
+    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
+        switch axis {
+        case .xAxis:
+            return BGKChartExtents(withAllAxisValues: chartItems.flatMap({ $0 }).map({ $0.xValue }))
+        case .yAxis:
+            return BGKChartExtents(withAllAxisValues: chartItems.flatMap({ $0 }).map({ $0.yValue }))
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extension BGKLineChartDataSource {
     private func lines(in lineChartView: BGKLineChartView) -> [BGKChartObject] {
         var allLines: [BGKChartObject] = []
         for lineNumber in 0..<numberOfLinesToDraw(in: lineChartView) {
@@ -70,9 +105,7 @@ public extension BGKLineChartDataSource {
     
     
     
-    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents {
-        return BGKChartExtents(min: minValue(for: axis, in: lineChartView), max: maxValue(for: axis, in: lineChartView))
-    }
+    
     func valueMin(_ lineChartView: BGKLineChartView, forAxis axis: BGKChartAxis) -> Double {
         let extents = valueExtents(for: axis, in: lineChartView)
         return chartExtentsShouldBePadded(lineChartView) ? extents.paddedMin : extents.min
