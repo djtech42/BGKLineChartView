@@ -13,7 +13,11 @@ public protocol BGKLineChartDataSource: class {
     
     // MARK: - Methods that Must be Implemented by User
     
-    var chartItems: [BGKChartObject] { get }
+    /// Provides the interface in which to provide a data structure to the chart.
+    ///
+    /// - Parameter lineChartView: line chart view object
+    /// - Returns: a collection of chart objects.
+    func chartItems(in lineChartView: BGKLineChartView) -> [BGKChartObject]
     
     /// Tells the line chart how many line objects are to be drawn.
     ///
@@ -44,12 +48,6 @@ public protocol BGKLineChartDataSource: class {
     /// - Parameter lineChartView: line chart object
     /// - Returns: style object for chart
     func style(for lineChartView: BGKLineChartView) -> BGKChartStyle?
-    
-    /// Exposes to Data Source object an internal structure for value extents to be drawn.
-    ///
-    /// - Parameter lineChartView: line chart object
-    /// - Returns: BGKChartExtents object
-    func valueExtents(for axis: BGKChartAxis, in lineChartView: BGKLineChartView) -> BGKChartExtents
     
     /// Tells the chart that the values drawn in the canvas will have a padding on the extents. This ensures that the values are drawn inside the edge of the canvas. This returns true by default.
     ///
