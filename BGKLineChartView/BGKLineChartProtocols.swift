@@ -8,17 +8,11 @@
 
 import Foundation
 
-public typealias BGKLine = [BGKLinePoint]
-
-/// Protocol that defines the interface for an object that can provide points for BGKLineChart.
-public protocol BGKLinePoint {
-    var xValue: Double { get }
-    var yValue: Double { get }
-}
+public typealias BGKChartObject = [BGKChartPoint]
 
 /// Protocol that defines the interface for a group of points that create a chartable object.
 public protocol BGKChartable {
-    var values: [BGKLinePoint] { get }
+    var values: [BGKChartPoint] { get }
 }
 
 
@@ -39,7 +33,7 @@ public protocol BGKLineChartDataSource: class {
     ///   - lineNumber: index of chart object
     ///   - lineChartView: line chart object
     /// - Returns: Array of line point objects
-    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint]
+    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKChartPoint]
 
     // MARK: - Methods with Default Implementations
     
@@ -67,8 +61,8 @@ public protocol BGKLineChartDataSource: class {
 }
 
 public extension BGKLineChartDataSource {
-    private func lines(in lineChartView: BGKLineChartView) -> [BGKLine] {
-        var allLines: [BGKLine] = []
+    private func lines(in lineChartView: BGKLineChartView) -> [BGKChartObject] {
+        var allLines: [BGKChartObject] = []
         for lineNumber in 0..<numberOfLinesToDraw(in: lineChartView) {
             allLines.append(points(thatForm: lineNumber, in: lineChartView))
         }
