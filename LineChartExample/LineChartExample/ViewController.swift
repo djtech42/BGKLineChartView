@@ -27,19 +27,19 @@ class ViewController: UIViewController {
     // Helper method to setup data
     func setupData() {
         
-        struct SampleData: BGKLinePoint {
+        struct SampleData: BGKChartPoint {
             var xValue: Double
             var yValue: Double
         }
         
         struct SampleLine: BGKChartable {
-            var values: [BGKLinePoint]
+            var values: [BGKChartPoint]
         }
         
         let samples = [1, 3, 5, 7, 9]
         let samplesTwo = [2, 4, 6, 8, 10]
-        var line1: [BGKLinePoint] = []
-        var line2: [BGKLinePoint] = []
+        var line1: [BGKChartPoint] = []
+        var line2: [BGKChartPoint] = []
         for (index, sample) in samples.enumerated() {
             let point = SampleData(xValue: Double(sample), yValue: Double(samplesTwo[index]))
             let otherPoint = SampleData(xValue: Double(samplesTwo[index] * 4), yValue: Double(sample * 2))
@@ -62,7 +62,7 @@ extension ViewController: BGKLineChartDataSource {
         return values.count
     }
     
-    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint] {
+    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKChartPoint] {
         return values[lineNumber].values
     }
 }

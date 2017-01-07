@@ -14,6 +14,7 @@
 		26990CB41E1353F8004146D2 /* BGKLineChartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */; };
 		26990CB51E1353F8004146D2 /* BGKLineChartViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */; };
 		26990CB61E1353F8004146D2 /* BGKChartAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */; };
+		26AA62411E216A4900C9D942 /* BGKChartPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AA62401E216A4900C9D942 /* BGKChartPoint.swift */; };
 		37468C8B1E15F2B8004DF4CB /* Array+IndexAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C8A1E15F2B8004DF4CB /* Array+IndexAccess.swift */; };
 		37468C8F1E15F371004DF4CB /* BGKConsoleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */; };
 		37468C931E15F9CB004DF4CB /* BGKLabelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */; };
@@ -31,6 +32,7 @@
 		26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartProtocols.swift; sourceTree = "<group>"; };
 		26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLineChartViewLabel.swift; sourceTree = "<group>"; };
 		26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartAxis.swift; sourceTree = "<group>"; };
+		26AA62401E216A4900C9D942 /* BGKChartPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKChartPoint.swift; sourceTree = "<group>"; };
 		37468C8A1E15F2B8004DF4CB /* Array+IndexAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+IndexAccess.swift"; sourceTree = "<group>"; };
 		37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKConsoleOutput.swift; sourceTree = "<group>"; };
 		37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGKLabelMode.swift; sourceTree = "<group>"; };
@@ -78,19 +80,76 @@
 		26990CA91E1353E3004146D2 /* Line Chart Files */ = {
 			isa = PBXGroup;
 			children = (
-				26990CAA1E1353F8004146D2 /* BGKLineChartView.swift */,
-				26990CAB1E1353F8004146D2 /* BGKLineChartViewCanvas.swift */,
-				26990CAC1E1353F8004146D2 /* BGKLineStyle.swift */,
-				AF6D879C1E1C5DA600D01992 /* BGKChartStyle.swift */,
-				26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */,
-				26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */,
-				26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */,
-				AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */,
-				37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */,
-				37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */,
+				26AA62391E21698200C9D942 /* Views */,
+				26AA623B1E2169AC00C9D942 /* Styles */,
+				26AA623C1E2169BB00C9D942 /* UI Types */,
+				26AA623E1E2169FF00C9D942 /* Protcols */,
+				26AA623D1E2169EE00C9D942 /* Helper Objects */,
 				37468C9A1E1601B6004DF4CB /* Extensions */,
 			);
 			name = "Line Chart Files";
+			sourceTree = "<group>";
+		};
+		26AA62391E21698200C9D942 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26AA623A1E21698C00C9D942 /* Internal Views */,
+				26990CAA1E1353F8004146D2 /* BGKLineChartView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		26AA623A1E21698C00C9D942 /* Internal Views */ = {
+			isa = PBXGroup;
+			children = (
+				26990CAB1E1353F8004146D2 /* BGKLineChartViewCanvas.swift */,
+			);
+			name = "Internal Views";
+			sourceTree = "<group>";
+		};
+		26AA623B1E2169AC00C9D942 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				26990CAC1E1353F8004146D2 /* BGKLineStyle.swift */,
+				AF6D879C1E1C5DA600D01992 /* BGKChartStyle.swift */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		26AA623C1E2169BB00C9D942 /* UI Types */ = {
+			isa = PBXGroup;
+			children = (
+				37468C921E15F9CB004DF4CB /* BGKLabelMode.swift */,
+				26990CAF1E1353F8004146D2 /* BGKChartAxis.swift */,
+				26990CAE1E1353F8004146D2 /* BGKLineChartViewLabel.swift */,
+			);
+			name = "UI Types";
+			sourceTree = "<group>";
+		};
+		26AA623D1E2169EE00C9D942 /* Helper Objects */ = {
+			isa = PBXGroup;
+			children = (
+				AF6D879A1E1C491700D01992 /* BGKChartExtents.swift */,
+				37468C8E1E15F371004DF4CB /* BGKConsoleOutput.swift */,
+			);
+			name = "Helper Objects";
+			sourceTree = "<group>";
+		};
+		26AA623E1E2169FF00C9D942 /* Protcols */ = {
+			isa = PBXGroup;
+			children = (
+				26AA623F1E216A0600C9D942 /* Line Chart Protocols */,
+			);
+			name = Protcols;
+			sourceTree = "<group>";
+		};
+		26AA623F1E216A0600C9D942 /* Line Chart Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				26990CAD1E1353F8004146D2 /* BGKLineChartProtocols.swift */,
+				26AA62401E216A4900C9D942 /* BGKChartPoint.swift */,
+			);
+			name = "Line Chart Protocols";
 			sourceTree = "<group>";
 		};
 		37468C9A1E1601B6004DF4CB /* Extensions */ = {
@@ -193,6 +252,7 @@
 				26990CB31E1353F8004146D2 /* BGKLineStyle.swift in Sources */,
 				26990CB11E1353F8004146D2 /* BGKLineChartView.swift in Sources */,
 				37468C8B1E15F2B8004DF4CB /* Array+IndexAccess.swift in Sources */,
+				26AA62411E216A4900C9D942 /* BGKChartPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
