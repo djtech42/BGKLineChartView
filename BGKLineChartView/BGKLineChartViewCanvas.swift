@@ -59,15 +59,14 @@ class BGKLineChartViewCanvas: UIView {
     }
     
     fileprivate func drawChartLines() {
-        guard let dataSource = dataSource,
-            let lineView = self.superview as? BGKLineChartView else { return }
-        
-        let numberOfLines = dataSource.numberOfLinesToDraw(in: lineView)
+        guard let dataSource = dataSource, let lineView = self.superview as? BGKLineChartView else { return }
+        let numberOfLines = dataSource.chartItems(in: lineView).count
         if numberOfLines == 0 {
             print(BGKConsoleOutput.noLinesWarning)
         }
+        
         for lineNumber in 0..<numberOfLines {
-            let valuePoints = dataSource.points(thatForm: lineNumber, in: lineView)
+            let valuePoints = dataSource.chartPoints(thatForm: lineNumber, in: lineView)
             guard !valuePoints.isEmpty else {
                 print(BGKConsoleOutput.emptyLineWarning(for: lineNumber))
                 continue

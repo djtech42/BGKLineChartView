@@ -10,6 +10,14 @@ import Foundation
 
 /// Below are private protocol default implementations.
 
+// MARK: - Responsible for Providing the Point Data Sets for A Giving Chart Object
+extension BGKLineChartDataSource {
+    func chartPoints(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKChartPoint] {
+        let values = chartItems(in: lineChartView)
+        return values.element(at: lineNumber) ?? []
+    }
+}
+
 
 // MARK: - Responsible for Determining Value Extents for the Canvas
 extension BGKLineChartDataSource {

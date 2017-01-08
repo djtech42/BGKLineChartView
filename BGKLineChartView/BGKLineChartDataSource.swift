@@ -19,20 +19,6 @@ public protocol BGKLineChartDataSource: class {
     /// - Returns: a collection of chart objects.
     func chartItems(in lineChartView: BGKLineChartView) -> [BGKChartObject]
     
-    /// Tells the line chart how many line objects are to be drawn.
-    ///
-    /// - Parameter lineChartView: line chart object
-    /// - Returns: Integer value of number of chart objects.
-    func numberOfLinesToDraw(in lineChartView: BGKLineChartView) -> Int
-    
-    /// Provides line points for the chart at an index.
-    ///
-    /// - Parameters:
-    ///   - lineNumber: index of chart object
-    ///   - lineChartView: line chart object
-    /// - Returns: Array of line point objects
-    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKChartPoint]
-    
     // MARK: - Methods with Default Implementations
     
     /// Method responsible for providing styling for line chart object.
