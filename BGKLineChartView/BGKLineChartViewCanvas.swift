@@ -12,6 +12,8 @@ import UIKit
 class BGKLineChartViewCanvas: UIView {
     
     var dataSource: BGKLineChartDataSource?
+    var xValueExtents: BGKChartExtents?
+    var yValueExtents: BGKChartExtents?
     
     var originLineWidth: CGFloat = 1.0 {
         didSet {
@@ -57,15 +59,14 @@ class BGKLineChartViewCanvas: UIView {
     }
     
     fileprivate func drawChartLines() {
-        guard let dataSource = dataSource,
-            let lineView = self.superview as? BGKLineChartView else { return }
-        
-        let numberOfLines = dataSource.numberOfLinesToDraw(in: lineView)
+        guard let dataSource = dataSource, let lineView = self.superview as? BGKLineChartView else { return }
+        let numberOfLines = dataSource.chartItems(in: lineView).count
         if numberOfLines == 0 {
             print(BGKConsoleOutput.noLinesWarning)
         }
+        
         for lineNumber in 0..<numberOfLines {
-            let valuePoints = dataSource.points(thatForm: lineNumber, in: lineView)
+            let valuePoints = dataSource.chartPoints(thatForm: lineNumber, in: lineView)
             guard !valuePoints.isEmpty else {
                 print(BGKConsoleOutput.emptyLineWarning(for: lineNumber))
                 continue
@@ -77,18 +78,19 @@ class BGKLineChartViewCanvas: UIView {
     
     // MARK: - Helper Methods
     
-    fileprivate func convertToCanvasPoints(valuePoints: [BGKLinePoint]) -> [CGPoint] {
+    fileprivate func convertToCanvasPoints(valuePoints: [BGKChartPoint]) -> [CGPoint] {
         guard let dataSource = dataSource,
-            let lineView = self.superview as? BGKLineChartView else { return [] }
+            let lineView = self.superview as? BGKLineChartView, let xValueExtents = xValueExtents, let yValueExtents = yValueExtents else { return [] }
         
-        let xAxisScale = bounds.width / CGFloat(dataSource.valueLength(lineView, forAxis: .xAxis))
-        let yAxisScale = bounds.height / CGFloat(dataSource.valueLength(lineView, forAxis: .yAxis))
-
+        let xAxisScale = dataSource.scaleValue(in: lineView, for: .xAxis, with: xValueExtents)
+        let yAxisScale = dataSource.scaleValue(in: lineView, for: .yAxis, with: yValueExtents)
+        let xMin = dataSource.minValue(in: lineView, with: xValueExtents)
+        let yMin = dataSource.minValue(in: lineView, with: yValueExtents)
+        
         var points: [CGPoint] = []
         for value in valuePoints {
-            let xValue = (value.xValue - dataSource.valueMin(lineView, forAxis: .xAxis)) * Double(xAxisScale)
-            let yValue = (value.yValue - dataSource.valueMin(lineView, forAxis: .yAxis)) * Double(yAxisScale)
-            
+            let xValue = (value.xValue - xMin) * Double(xAxisScale)
+            let yValue = (value.yValue - yMin) * Double(yAxisScale)
             let yValueForBottomOrigin = Double(bounds.height) - yValue
             let newPoint = CGPoint(x: xValue, y: yValueForBottomOrigin)
             points.append(newPoint)

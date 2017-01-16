@@ -27,43 +27,33 @@ class ViewController: UIViewController {
     // Helper method to setup data
     func setupData() {
         
-        struct SampleData: BGKLinePoint {
+        struct SampleData: BGKChartPoint {
             var xValue: Double
             var yValue: Double
         }
         
-        struct SampleLine: BGKChartable {
-            var values: [BGKLinePoint]
-        }
-        
         let samples = [1, 3, 5, 7, 9]
         let samplesTwo = [2, 4, 6, 8, 10]
-        var line1: [BGKLinePoint] = []
-        var line2: [BGKLinePoint] = []
+        var line1: BGKChartObject = []
+        var line2: BGKChartObject = []
         for (index, sample) in samples.enumerated() {
             let point = SampleData(xValue: Double(sample), yValue: Double(samplesTwo[index]))
             let otherPoint = SampleData(xValue: Double(samplesTwo[index] * 4), yValue: Double(sample * 2))
             line1.append(point)
             line2.append(otherPoint)
         }
-        
-        values.append(SampleLine(values: line1))
-        values.append(SampleLine(values: line2))
-        
+        values.append(line1)
+        values.append(line2)
         lineChart.dataSource = self
     }
     
-    var values: [BGKChartable] = []
+    var values: [BGKChartObject] = []
 }
 
 extension ViewController: BGKLineChartDataSource {
     // DataSource Conformance
-    func numberOfLinesToDraw(in lineChartView: BGKLineChartView) -> Int {
-        return values.count
-    }
-    
-    func points(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKLinePoint] {
-        return values[lineNumber].values
+    func chartItems(in lineChartView: BGKLineChartView) -> [BGKChartObject] {
+        return values
     }
 }
 
@@ -73,6 +63,6 @@ extension ViewController {
     }
     
     func labelMode(for lineChartView: BGKLineChartView) -> BGKLabelMode {
-        return .range(numberOfDecimalDigits: 1)
+        return .minMax(withLimitedNumberOfDecimalDigits: 2)
     }
 }

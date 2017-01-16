@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// Label Mode specifies behavior for the four labels on the line chart.
 ///
 /// - hidden: hide all labels
