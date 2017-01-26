@@ -11,34 +11,66 @@ public enum FunctionValueSystem {
     case x
 }
 
-public struct ExpandedFunction<T: BinaryFloatingPoint> {
-    public let function: (T) -> T
+public struct ExpandedFunction {
+    public enum ResolutionLevel: RawRepresentable {
+        case veryLow
+        case low
+        case medium
+        case high
+        case veryHigh
+        case custom(Double)
+        
+        public var rawValue: Double {
+            switch self {
+            case .veryLow: return 20
+            case .low: return 40
+            case .medium: return 80
+            case .high: return 160
+            case .veryHigh: return 320
+            case let .custom(value): return value
+            }
+        }
+        
+        public init?(rawValue: Double) {
+            switch rawValue {
+            case 20: self = .veryLow
+            case 40: self = .low
+            case 80: self = .medium
+            case 160: self = .high
+            case 320: self = .veryHigh
+            default: self = .custom(rawValue)
+            }
+        }
+    }
+    
+    public let function: (Double) -> Double
     public var valueSystem: FunctionValueSystem {
         didSet {
             updatePoints()
         }
     }
     
-    public var range: Range<T> {
+    public var range: Range<Double> {
         didSet {
             updatePoints()
         }
     }
-    public var resolution: T {
+    public var resolutionLevel: ResolutionLevel {
         didSet {
             updatePoints()
         }
     }
     
-    public var points: Line<T> = Line(with: [])
+    public var line: Line = Line(with: [])
+    public var points: [Point] = []
     
     
-    public init(_ function: @escaping (T) -> T, usingValueSystem valueSystem: FunctionValueSystem = .y, overRange range: Range<T>, atResolution resolution: T) {
+    public init(_ function: @escaping (Double) -> Double, usingValueSystem valueSystem: FunctionValueSystem = .y, overRange range: Range<Double>, atResolutionLevel resolutionLevel: ResolutionLevel = .medium) {
         self.function = function
         self.valueSystem = valueSystem
         
         self.range = range
-        self.resolution = resolution
+        self.resolutionLevel = resolutionLevel
         
         updatePoints()
     }
@@ -47,12 +79,16 @@ public struct ExpandedFunction<T: BinaryFloatingPoint> {
     private mutating func updatePoints() {
         let xValues = stride(from: range.lowerBound, to: range.upperBound, by: calculatedStride)
         switch valueSystem {
-        case .y: points = Line(with: xValues.map({ Point(x: $0, y: function($0)) }))
-        case .x: points = Line(with: xValues.map({ Point(x: function($0), y: $0) }))
+        case .y:
+            points = xValues.map({ Point(x: $0, y: function($0)) })
+            line = Line(with: points)
+        case .x:
+            points = xValues.map({ Point(x: function($0), y: $0) })
+            line = Line(with: points)
         }
     }
     
-    private var calculatedStride: T.Stride {
-        return range.lowerBound.distance(to: range.lowerBound + range.upperBound / resolution)
+    private var calculatedStride: Double.Stride {
+        return range.lowerBound.distance(to: range.lowerBound + range.upperBound / resolutionLevel.rawValue)
     }
 }

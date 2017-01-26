@@ -6,28 +6,28 @@
 //  Copyright © 2017 Dan Turner. All rights reserved.
 //
 
-public struct Line<T: BinaryFloatingPoint> {
-    public let points: [Point<T>]
-    public var xValues: [T] {
+public struct Line {
+    public let points: [Point]
+    public var xValues: [Double] {
         return points.map({ $0.x })
     }
-    public var yValues: [T] {
+    public var yValues: [Double] {
         return points.map({ $0.y })
     }
     
-    public init(with points: [Point<T>]) {
+    public init(with points: [Point]) {
         self.points = points
     }
     
-    public var max: T? {
+    public var max: Double? {
         return yValues.max()
     }
-    public var min: T? {
+    public var min: Double? {
         return yValues.min()
     }
 }
 
-public func inverted<T>(_ line: Line<T>) -> Line<T> {
+public func inverted(_ line: Line) -> Line {
     return Line(with: line.points.map(inverted))
 }
 

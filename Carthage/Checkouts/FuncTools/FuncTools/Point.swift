@@ -6,12 +6,12 @@
 //  Copyright © 2017 Dan Turner. All rights reserved.
 //
 
-public struct Point<T> {
-    public let x: T
-    public let y: T
+public struct Point {
+    public let x: Double
+    public let y: Double
 }
 
-public func inverted<T>(_ point: Point<T>) -> Point<T> {
+public func inverted(_ point: Point) -> Point {
     return Point(x: point.y, y: point.x)
 }
 
