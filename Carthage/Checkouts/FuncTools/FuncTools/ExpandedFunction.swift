@@ -1,5 +1,5 @@
 //
-//  Transform Functions.swift
+//  ExpandedFunctions.swift
 //  FuncTools
 //
 //  Created by Dan on 1/15/17.
@@ -61,8 +61,29 @@ public struct ExpandedFunction {
         }
     }
     
-    public var line: Line = Line(with: [])
     public var points: [Point] = []
+    public var xValues: [Double] = []
+    public var yValues: [Double] = []
+    
+    public var max: Double? {
+        return yValues.max()
+    }
+    public var min: Double? {
+        return yValues.min()
+    }
+    
+    public var linearRegressionLine: ExpandedFunction {
+        let meanX = points.reduce(0) { $0 + $1.x } / Double(points.count)
+        let meanY = points.reduce(0) { $0 + $1.y } / Double(points.count)
+        
+        let a = points.reduce(0) { $0 + ($1.x - meanX) * ($1.y - meanY) }
+        let b = points.reduce(0) { $0 + pow($1.x - meanX, 2) }
+        
+        let m = a / b
+        let c = meanY - m * meanX
+        
+        return ExpandedFunction({ m * $0 + c }, usingValueSystem: valueSystem, overRange: range, atResolutionLevel: resolutionLevel)
+    }
     
     
     public init(_ function: @escaping (Double) -> Double, usingValueSystem valueSystem: FunctionValueSystem = .y, overRange range: Range<Double>, atResolutionLevel resolutionLevel: ResolutionLevel = .medium) {
@@ -77,15 +98,16 @@ public struct ExpandedFunction {
     
     
     private mutating func updatePoints() {
-        let xValues = stride(from: range.lowerBound, to: range.upperBound, by: calculatedStride)
         switch valueSystem {
         case .y:
-            points = xValues.map({ Point(x: $0, y: function($0)) })
-            line = Line(with: points)
+            xValues = stride(from: range.lowerBound, to: range.upperBound, by: calculatedStride).map({ $0 })
+            yValues = xValues.map({ function($0) })
         case .x:
-            points = xValues.map({ Point(x: function($0), y: $0) })
-            line = Line(with: points)
+            xValues = xValues.map({ function($0) })
+            yValues = stride(from: range.lowerBound, to: range.upperBound, by: calculatedStride).map({ $0 })
         }
+        
+        points = xValues.enumerated().map({ Point(x: xValues[$0.offset], y: yValues[$0.offset]) })
     }
     
     private var calculatedStride: Double.Stride {

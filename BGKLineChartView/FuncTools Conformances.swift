@@ -17,12 +17,6 @@ extension Point: BGKChartPoint {
     }
 }
 
-extension Line: BGKChartable {
-    public var values: [BGKChartPoint] {
-        return points
-    }
-}
-
 extension ExpandedFunction: BGKChartable {
     public var values: [BGKChartPoint] {
         return points

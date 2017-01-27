@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37BFD1371E2C8147001EC38B /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BFD1361E2C8147001EC38B /* Line.swift */; };
-		37BFD1391E2C815C001EC38B /* Transform Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BFD1381E2C815C001EC38B /* Transform Functions.swift */; };
+		37BFD1391E2C815C001EC38B /* ExpandedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BFD1381E2C815C001EC38B /* ExpandedFunction.swift */; };
 		37FAA1431E1CA74E0078C9AC /* FuncTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FAA1391E1CA74E0078C9AC /* FuncTools.framework */; };
 		37FAA1481E1CA74E0078C9AC /* FuncToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FAA1471E1CA74E0078C9AC /* FuncToolsTests.swift */; };
 		37FAA14A1E1CA74E0078C9AC /* FuncTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FAA13C1E1CA74E0078C9AC /* FuncTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,8 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		37BFD1361E2C8147001EC38B /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		37BFD1381E2C815C001EC38B /* Transform Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Transform Functions.swift"; sourceTree = "<group>"; };
+		37BFD1381E2C815C001EC38B /* ExpandedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedFunction.swift; sourceTree = "<group>"; };
 		37FAA1391E1CA74E0078C9AC /* FuncTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FuncTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FAA13C1E1CA74E0078C9AC /* FuncTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FuncTools.h; sourceTree = "<group>"; };
 		37FAA13D1E1CA74E0078C9AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,8 +77,7 @@
 			children = (
 				37FAA13C1E1CA74E0078C9AC /* FuncTools.h */,
 				37FAA1531E1CA7780078C9AC /* Point.swift */,
-				37BFD1361E2C8147001EC38B /* Line.swift */,
-				37BFD1381E2C815C001EC38B /* Transform Functions.swift */,
+				37BFD1381E2C815C001EC38B /* ExpandedFunction.swift */,
 				37FAA13D1E1CA74E0078C9AC /* Info.plist */,
 			);
 			path = FuncTools;
@@ -207,8 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FAA1541E1CA7780078C9AC /* Point.swift in Sources */,
-				37BFD1371E2C8147001EC38B /* Line.swift in Sources */,
-				37BFD1391E2C815C001EC38B /* Transform Functions.swift in Sources */,
+				37BFD1391E2C815C001EC38B /* ExpandedFunction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
