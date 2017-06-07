@@ -13,6 +13,7 @@
 		2656F88A1E170EB700F6CD95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2656F8891E170EB700F6CD95 /* Assets.xcassets */; };
 		2656F88D1E170EB700F6CD95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2656F88B1E170EB700F6CD95 /* LaunchScreen.storyboard */; };
 		26AA62381E2168EC00C9D942 /* BGKLineChartView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26AA62371E2168D900C9D942 /* BGKLineChartView.framework */; };
+		377E8CA21EE88476002C7B40 /* FuncTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377E8CA11EE88476002C7B40 /* FuncTools.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		2656F88C1E170EB700F6CD95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2656F88E1E170EB700F6CD95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26AA62321E2168D900C9D942 /* BGKLineChartView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BGKLineChartView.xcodeproj; path = ../BGKLineChartView.xcodeproj; sourceTree = "<group>"; };
+		377E8CA11EE88476002C7B40 /* FuncTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FuncTools.framework; path = ../Carthage/Build/iOS/FuncTools.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377E8CA21EE88476002C7B40 /* FuncTools.framework in Frameworks */,
 				26AA62381E2168EC00C9D942 /* BGKLineChartView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +70,7 @@
 				26AA62321E2168D900C9D942 /* BGKLineChartView.xcodeproj */,
 				2656F8811E170EB700F6CD95 /* LineChartExample */,
 				2656F8801E170EB700F6CD95 /* Products */,
+				377E8CA01EE88476002C7B40 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +101,14 @@
 				26AA62371E2168D900C9D942 /* BGKLineChartView.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		377E8CA01EE88476002C7B40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				377E8CA11EE88476002C7B40 /* FuncTools.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,7 +328,7 @@
 				DEVELOPMENT_TEAM = JVV56LA836;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					/Users/dan/Repos/BGKlineChartView/Carthage/Build/iOS,
 				);
 				INFOPLIST_FILE = LineChartExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -333,7 +345,7 @@
 				DEVELOPMENT_TEAM = JVV56LA836;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					/Users/dan/Repos/BGKlineChartView/Carthage/Build/iOS,
 				);
 				INFOPLIST_FILE = LineChartExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
