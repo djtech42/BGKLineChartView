@@ -12,7 +12,7 @@ import Foundation
 
 // MARK: - Responsible for Providing the Point Data Sets for A Giving Chart Object
 extension BGKLineChartDataSource {
-    func chartPoints(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKChartPoint] {
+    func chartPoints(thatForm lineNumber: Int, in lineChartView: BGKLineChartView) -> [BGKPointRepresentable] {
         let values = chartItems(in: lineChartView)
         return values.element(at: lineNumber) ?? []
     }

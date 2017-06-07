@@ -78,7 +78,7 @@ class BGKLineChartViewCanvas: UIView {
     
     // MARK: - Helper Methods
     
-    fileprivate func convertToCanvasPoints(valuePoints: [BGKChartPoint]) -> [CGPoint] {
+    fileprivate func convertToCanvasPoints(valuePoints: [BGKPointRepresentable]) -> [CGPoint] {
         guard let dataSource = dataSource,
             let lineView = self.superview as? BGKLineChartView, let xValueExtents = xValueExtents, let yValueExtents = yValueExtents else { return [] }
         

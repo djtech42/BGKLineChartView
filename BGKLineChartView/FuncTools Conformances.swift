@@ -8,7 +8,7 @@
 
 import FuncTools
 
-extension Point: BGKChartPoint {
+extension Point: BGKPointRepresentable {
     public var xValue: Double {
         return x
     }
@@ -18,7 +18,7 @@ extension Point: BGKChartPoint {
 }
 
 extension ExpandedFunction: BGKChartable {
-    public var values: [BGKChartPoint] {
+    public var values: [BGKPointRepresentable] {
         return points
     }
 }

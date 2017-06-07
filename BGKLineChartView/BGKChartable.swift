@@ -8,9 +8,9 @@
 
 import Foundation
 
-public typealias BGKChartObject = [BGKChartPoint]
+public typealias BGKChartObject = [BGKPointRepresentable]
 
 /// Protocol that defines the interface for a group of points that create a chartable object.
 public protocol BGKChartable {
-    var values: [BGKChartPoint] { get }
+    var values: [BGKPointRepresentable] { get }
 }
